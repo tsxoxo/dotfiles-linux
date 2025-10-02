@@ -1,0 +1,29 @@
+[user]
+	name = Tom Szwaja
+	email = tsxoxo@proton.me
+[core]
+	editor = nvim
+[alias]
+	a = add
+	c = commit
+	st = status
+	co = checkout
+	pom = push origin master
+    acp = "!f() { msg='$*'; git add . && git commit -m $msg && git push origin tom_sz; }; f"
+
+
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

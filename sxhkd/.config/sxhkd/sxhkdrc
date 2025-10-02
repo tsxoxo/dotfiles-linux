@@ -1,0 +1,44 @@
+# Switch between apps
+ctrl + w ; { h, u, j, m, i}
+  wmctrl -xa \ 
+  { \
+    kitty || kitty, \
+    firefox || firefox, \
+    qutebrowser || qutebrowser, \
+    mpv || mpv, \
+    nomacs || nomacs \
+  }
+
+# Switch to last focused window
+# relies on daemon started via ~/.fluxbox/startup: ~/.local/bin/last_window_d
+ctrl + w ; w
+  xdotool windowactivate "$(cat ~/.last_window)" 2>/dev/null || :
+
+# Reloading various configs
+ctrl + dollar ; r ; {s,f,k}
+  { \
+    pkill -USR1 -x sxhkd; notify-send -t 1500 'sxhkd' 'Reloaded config', \
+    fluxbox-remote reconfigure; notify-send -t 1500 'fluxbox' 'Reloaded config', \
+    pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config' \
+  }
+
+ctrl + dollar ; t
+  notify-send -t 5000 "Today is wow the time is now" "$(date +%c)"
+
+# Media keys: prev, play, next
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioPlay  
+    playerctl play-pause
+
+XF86AudioNext
+    playerctl next
+
+# Screenshots
+ctrl + dollar ; s ; {f,p}
+    { \
+    scrot $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took full screenshot', \
+    scrot -s $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took partial screenshot', \
+    }
+

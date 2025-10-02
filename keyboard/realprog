@@ -1,0 +1,71 @@
+default partial alphanumeric_keys modifier_keys
+xkb_symbols "basic" {
+    name[Group1]= "Real Prog QWERTY";
+
+    // Caps is hyper, Tab/Escape swap
+    // key <CAPS> { [ Hyper_L ] };
+    // modifier_map Mod4 { <CAPS> };
+    key <CAPS> { [ Control_L ] };
+    modifier_map Control { <CAPS> };
+    key <TAB>  { [ Escape ] };
+    key <ESC>  { [ Tab ] };
+    
+    // Row 1 (numbers) - your custom programming layout
+    key <TLDE> { [ ISO_Level3_Shift] };  // ` key
+    key <AE01> { [       plus,          1 ] };  // 1
+    key <AE02> { [ bracketleft,         2 ] };  // 2
+    key <AE03> { [  braceleft,          3 ] };  // 3
+    key <AE04> { [  parenleft,          4 ] };  // 4
+    key <AE05> { [  ampersand,          5 ] };  // 5
+    key <AE06> { [      equal,          6 ] };  // 6
+    key <AE07> { [ parenright,          7 ] };  // 7
+    key <AE08> { [ braceright,          8 ] };  // 8
+    key <AE09> { [bracketright,         9 ] };  // 9
+    key <AE10> { [   asterisk,          0 ] };  // 0
+    key <AE11> { [     exclam,    percent ] };  // -
+    key <AE12> { [         bar,     grave ] }; // =
+    
+    // Row 2 (QWERTY)
+    key <AD01> { [          q,          Q ] };
+    key <AD02> { [          w,          W ] };
+    key <AD03> { [          e,          E, EuroSign ] };
+    key <AD04> { [          r,          R ] };
+    key <AD05> { [          t,          T ] };
+    key <AD06> { [          y,          Y ] };
+    key <AD07> { [          u,          U, udiaeresis, Udiaeresis ] };
+    key <AD08> { [          i,          I ] };
+    key <AD09> { [          o,          O, odiaeresis, Odiaeresis ] };
+    key <AD10> { [          p,          P ] };
+    key <AD11> { [      slash,   question ] };
+    key <AD12> { [         at,asciicircum ] };
+    
+    // Row 3 (ASDF)
+    key <AC01> { [          a,          A, adiaeresis, Adiaeresis ] };
+    key <AC02> { [          s,          S, ssharp ] };
+    key <AC03> { [          d,          D ] };
+    key <AC04> { [          f,          F ] };
+    key <AC05> { [          g,          G ] };
+    key <AC06> { [          h,          H ] };
+    key <AC07> { [          j,          J ] };
+    key <AC08> { [          k,          K ] };
+    key <AC09> { [          l,          L ] };
+    key <AC10> { [  semicolon,      colon ] };
+    key <AC11> { [      minus, underscore ] };
+    key <BKSL> { [  backslash, numbersign ] };
+    
+    // Row 4 (ZXCV)
+    key <AB01> { [          z,          Z ] };
+    key <AB02> { [          x,          X ] };
+    key <AB03> { [          c,          C ] };
+    key <AB04> { [          v,          V ] };
+    key <AB05> { [          b,          B ] };
+    key <AB06> { [          n,          N ] };
+    key <AB07> { [          m,          M ] };
+    key <AB08> { [      comma,       less ] };
+    key <AB09> { [     period,    greater ] };
+    key <AB10> { [ apostrophe,   quotedbl ] };
+    
+    // ISO extra key (between shift and z)
+    key <LSGT> { [     dollar, asciitilde ] };
+    
+};

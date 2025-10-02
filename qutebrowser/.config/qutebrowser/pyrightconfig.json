@@ -1,0 +1,4 @@
+{
+    "exclude": ["**/config.py"],
+    "ignore": ["**/config.py"]
+}

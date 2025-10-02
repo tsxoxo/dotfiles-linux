@@ -1,0 +1,26 @@
+! The following line will prevent styles from setting the background.
+background: none
+
+#Example settings for font name, size, etc., for menu and toolbar
+
+#toolbar.clock.font: Sans-12:bold
+#toolbar.workspace.font: Sans-11:regular
+#toolbar.iconbar.focused.font: Sans-11:regular
+#toolbar.iconbar.unfocused.font: Sans-11:regular
+#window.font: Sans-11:bold
+#menu.title.font: Sans-11:regular
+#menu.frame.font: Sans-11:italic
+
+# double menu width
+menu.bevelWidth: 2
+
+# force elements to un-autohide correctly on MX-23
+slit.borderWidth: 0
+slit.bevelWidth: 2
+toolbar.borderWidth: 0
+
+window.title.height: 0
+window.borderWidth: 1
+window.unfocus.borderColor: #222222
+window.focus.borderColor: #12dead
+
