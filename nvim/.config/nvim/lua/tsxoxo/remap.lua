@@ -55,9 +55,9 @@ create_quick_slot("p")
 -----------------------------
 -- INTRA-BUFFER NAVIGATION --
 -----------------------------
-vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { desc = "Move down half a page while keeping cursor centered." })
-vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { desc = "Move up half a page while keeping cursor centered." })
-vim.keymap.set("i", "<C-l>", "<Right> ", { desc = "Move cursor from between brackets." })
+vim.keymap.set({ "n", "v" }, "<M-d>", "<C-d>zz", { desc = "Move down half a page while keeping cursor centered." })
+vim.keymap.set({ "n", "v" }, "<M-u>", "<C-u>zz", { desc = "Move up half a page while keeping cursor centered." })
+vim.keymap.set("i", "<M-l>", "<Right> ", { desc = "Move cursor from between brackets." })
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Leave insert mode" })
 
 -------------------
@@ -117,7 +117,8 @@ end, { desc = "Search word to quickfix" })
 -- Snippets --
 --------------
 -- Em-Dash
-vim.keymap.set("i", "--", "—", { desc = "Em dash" })
+-- press '\' twice
+vim.keymap.set("i", "\\\\", "—", { desc = "Em dash" })
 
 -- Borders to separate code sections
 vim.keymap.set("n", "<leader>g#", "60i#<Esc>", { desc = "#####" })

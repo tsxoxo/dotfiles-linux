@@ -1,25 +1,29 @@
 #!/usr/bin/env bash
 
 # configs
-alias vimconf='nvim ~/.config/nvim'
+alias conf='nvim ~/dotfiles/'
+alias dotconf='nvim ~/dotfiles/'
+alias vimconf='nvim ~/dotfiles/nvim/.config/nvim/'
 alias bashconf='nvim ~/.bashrc'
 alias bashalias='nvim ~/.bash_aliases'
 alias aliasconf='nvim ~/.bash_aliases'
+alias kitconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
+alias kittyconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
+alias tmuxconf='nvim ~/dotfiles/tmux/.config/tmux/tmux.conf'
+alias keyconf='sudoedit nvim /usr/share/X11/xkb/symbols/realprog'
+alias sxconf='nvim ~/dotfiles/sxhkd/.config/sxhkd/sxhkdrc'
+alias bspconf='nvim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
+alias qbconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
+alias quteconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias fluxconf='nvim ~/.fluxbox/'
 alias tintconf='nvim ~/.config/tint2/'
-alias kitconf='nvim ~/.config/kitty/kitty.conf'
-alias kittyconf='nvim ~/.config/kitty/kitty.conf'
-alias tmuxconf='nvim ~/.config/tmux/tmux.conf'
-alias keyconf='nvim ~/.config/fluxbox/keys ~/.config/sxhkd/sxhkdrc ~/.config/keyboard/realprog'
-alias sxconf='nvim ~/.config/sxhkd/sxhkdrc'
-alias qbconf='nvim ~/.config/qutebrowser/config.py'
 
-# other contexts
+# docs
 alias docs='nvim ~/docs'
 
 # abbreviations
 alias v=nvim
-alias sv='sudo -E nvim'
+alias sv='sudoedit nvim'
 alias bs='source ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -29,6 +33,9 @@ alias ....='cd ../../..'
 # useful defaults
 alias mv="mv -iv"       # dont overwrite stuff, show results
 alias mkdir="mkdir -pv" # also dont overwrite stuff, show results
+alias rm="rm -Iv"       # confirm when >3; verbose
+
+alias xclip="xclip -selection clipboard"
 
 # From the pros
 alias r="fc -s" # repeat last command: `r`; ...that starts with cc: `r cc`
@@ -63,6 +70,7 @@ alias ezal="eza_col_icons --long"
 
 # git
 alias g="git"
+alias gss="git status -s"
 alias ga="git add"
 alias gaa="git add --all"
 alias gc="git commit --verbose"

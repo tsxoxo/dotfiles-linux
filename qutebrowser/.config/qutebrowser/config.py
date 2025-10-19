@@ -54,10 +54,13 @@ c.downloads.location.prompt = False
 ## Type: Int
 c.downloads.remove_finished = 5000
 
+c.auto_save.session = True
+c.session.lazy_restore = False
+
 #----------
 # CONTENT -
 #----------
-c.content.notifications = False
+c.content.notifications.enabled = False
 
 #----------
 # SEARCH --
@@ -100,7 +103,7 @@ config.bind(',&', 'tab-focus 5')
 config.bind(',=', 'tab-focus 6')
 config.bind(',)', 'tab-focus 7')
 config.bind(',}', 'tab-focus 8')
-config.bind(',]', 'tab-focus 9')
+config.bind(',]', 'tab-focus -1')
 
 # hop between last used tabs
 config.bind(',j', 'tab-focus stack-next')
@@ -108,15 +111,16 @@ config.bind(',k', 'tab-focus stack-prev')
 config.bind(',,', 'tab-focus last')
 
 # Move tabs
-config.bind(',m+', 'tab-move 1')
-config.bind(',m[', 'tab-move 2')
-config.bind(',m{', 'tab-move 3')
-config.bind(',m(', 'tab-move 4')
-config.bind(',m&', 'tab-move 5')
-config.bind(',m=', 'tab-move 6')
-config.bind(',m)', 'tab-move 7')
-config.bind(',m}', 'tab-move 8')
-config.bind(',m]', 'tab-move 9')
+# haven't used them in a week
+# config.bind(',m+', 'tab-move 1')
+# config.bind(',m[', 'tab-move 2')
+# config.bind(',m{', 'tab-move 3')
+# config.bind(',m(', 'tab-move 4')
+# config.bind(',m&', 'tab-move 5')
+# config.bind(',m=', 'tab-move 6')
+# config.bind(',m)', 'tab-move 7')
+# config.bind(',m}', 'tab-move 8')
+# config.bind(',m]', 'tab-move 9')
 
 # Close tabs
 # ...below current one
@@ -145,24 +149,45 @@ config.bind(';m', 'hint links spawn mpv {hint-url}')
 config.bind('xj', 'spawn bash -c "echo {url} >> ~/.config/qutebrowser/js_blacklist.txt"')
 
 #----------
-# THEME --
+# STYLE --
 #----------
 # Instructions: put a theme in ./themes/<theme> and source the .py entry file
 config.source('themes/qute-city-lights/city-lights-theme.py')
 
-c.fonts.hints = '11pt FiraCode Nerd Font'
-c.fonts.keyhint = '11pt FiraCode Nerd Font'
-c.fonts.prompts = '11pt FiraCode Nerd Font'
-c.fonts.downloads = '11pt FiraCode Nerd Font'
-c.fonts.statusbar = '11pt FiraCode Nerd Font'
-c.fonts.contextmenu = '11pt FiraCode Nerd Font'
-c.fonts.messages.info = '11pt FiraCode Nerd Font'
-c.fonts.debug_console = '11pt FiraCode Nerd Font'
-c.fonts.completion.entry = '11pt FiraCode Nerd Font'
-c.fonts.completion.category = '11pt FiraCode Nerd Font'
-c.fonts.tabs.selected = '11pt FiraCode Nerd Font'
-c.fonts.tabs.unselected = '11pt FiraCode Nerd Font'
+# fonts alt
+# c.fonts.hints = '11pt FiraCode Nerd Font'
+# c.fonts.keyhint = '11pt FiraCode Nerd Font'
+# c.fonts.prompts = '11pt FiraCode Nerd Font'
+# c.fonts.downloads = '11pt FiraCode Nerd Font'
+# c.fonts.statusbar = '11pt FiraCode Nerd Font'
+# c.fonts.contextmenu = '11pt FiraCode Nerd Font'
+# c.fonts.messages.info = '11pt FiraCode Nerd Font'
+# c.fonts.debug_console = '11pt FiraCode Nerd Font'
+# c.fonts.completion.entry = '11pt FiraCode Nerd Font'
+# c.fonts.completion.category = '11pt FiraCode Nerd Font'
+# c.fonts.tabs.selected = '11pt FiraCode Nerd Font'
+# c.fonts.tabs.unselected = '11pt FiraCode Nerd Font'
 
+# fonts
+c.fonts.default_family = []
+c.fonts.default_size = '13pt'
+c.fonts.web.family.fixed = 'monospace'
+c.fonts.web.family.sans_serif = 'monospace'
+c.fonts.web.family.serif = 'monospace'
+c.fonts.web.family.standard = 'monospace'
+
+# dark mode setup
+c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+c.colors.webpage.darkmode.policy.images = 'never'
+config.set('colors.webpage.darkmode.enabled', False, 'file://*')
+
+# styles, cosmetics
+# c.content.user_stylesheets = ["~/.config/qutebrowser/styles/youtube-tweaks.css"]
+c.tabs.padding = {'top': 5, 'bottom': 5, 'left': 9, 'right': 9}
+c.tabs.indicator.width = 0 # no tab indicators
+# c.window.transparent = True # apparently not needed
+c.tabs.width = '17%'
 
 #-------------
 # DEFAULTS --
@@ -187,7 +212,7 @@ c.fonts.tabs.unselected = '11pt FiraCode Nerd Font'
 ## session which was last loaded. This behavior can be customized via the
 ## `session.default_name` setting.
 ## Type: Bool
-c.auto_save.session = True
+# c.auto_save.session = True
 
 ## Backend to use to display websites. qutebrowser supports two different
 ## web rendering engines / backends, QtWebEngine and QtWebKit (not

@@ -44,7 +44,7 @@ Ctrl F2 :Exec mxfb-rofirun
 
 # use logo key for rofi
 # Super_L Space :Exec rofi -show drun
-Mod4 space :Exec rofi -show drun
+# Mod4 space :Exec rofi -show drun
 
 # open a file manager
 Ctrl F3 :Exec thunar /home/$USER/.fluxbox

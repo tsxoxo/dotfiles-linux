@@ -37,8 +37,8 @@ gi jump to last edit and switch to insert mode
 
 ### Copy from command line
 
-<C-f> " In command mode: open command history window
-q: " From normal mode: open command history window
+`<C-f>` In command mode: open command history window
+`q:` From normal mode: open command history window
 
 ### Get CWD of current buffer
 

@@ -37,7 +37,8 @@
 [exec] (Firefox ) { firefox  } Categories=Network;WebBrowser;
 [exec] (MX Network Assistant ) { mx-network-assistant } Categories=System;MX-Tools;
 [exec] (MX Viewer ) { mx-viewer  } Categories=Qt;Network;Utilities;
-[exec] (qutebrowser ) { qutebrowser } Categories=Network;WebBrowser;
+[exec] (qutebrowser ) { setsid -w qutebrowser  } Categories=Network;WebBrowser;
+[exec] (Signal ) { /opt/Signal/signal-desktop  } Categories=Network;InstantMessaging;Chat;
 [end]
 [submenu] (Multimedia)
 [exec] (Alsamixer ) { x-terminal-emulator -e alsamixer } Categories=AudioVideo;Player;Audio;
@@ -100,7 +101,10 @@
 [exec] (Trash check ) { mxfb-trashcheck } Categories=System;X-MXFB-Tools;
 [end]
 [submenu] (Office)
+[exec] (1Password ) { /opt/1Password/1password  } Categories=Office;
 [exec] (qpdfview ) { qpdfview --unique  } Categories=Viewer;Office;
+[exec] (Zathura ) { zathura  } Categories=Office;Viewer;
+[exec] (Zathura ) { zathura  } Categories=Office;Viewer;
 [end]
 [submenu] (System)
 [exec] (About MX Linux ) { mx-welcome --about } Categories=GNOME;GTK;System;MX-Tools;
@@ -126,7 +130,7 @@
 [exec] (Hardinfo2 ) { hardinfo2 } Categories=System;Utility;
 [exec] (Htop ) { x-terminal-emulator -e htop } Categories=System;Monitor;ConsoleOnly;
 [exec] (Job Scheduler ) { job-scheduler } Categories=System;MX-Tools
-[exec] (kitty ) { /home/tom/.local/kitty.app/bin/kitty -e tmux attach } Categories=System;TerminalEmulator;
+[exec] (kitty ) { /home/tom/.local/kitty.app/bin/kitty --detach -e tmux } Categories=System;TerminalEmulator;
 [exec] (LightDM GTK+ Greeter settings ) { lightdm-gtk-greeter-settings-pkexec } Categories=GNOME;GTK;Settings;System;Utility;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 [exec] (Look ) { mxfb-look } Categories=System;X-MXFB-Tools;
 [exec] (Manual ) { mxfb-help } Categories=System;

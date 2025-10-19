@@ -1,8 +1,17 @@
+## HOWTO
+
+### Add
+
+
 ## apps
 
+**wm**
+- bspwm
+
 **core**
-tmux, kitty, wezterm
-yazi
+* tmux
+* kitty
+* yazi
 
 nvim
 
@@ -12,7 +21,7 @@ bat
 tldr
 
 sxhkd
-last-window.d
+last-window.d — not necessary under bspwm
 
 **media**
 mpv, yt-dlp, 

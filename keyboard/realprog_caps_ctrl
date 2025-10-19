@@ -2,11 +2,11 @@ default partial alphanumeric_keys modifier_keys
 xkb_symbols "basic" {
     name[Group1]= "Real Prog QWERTY";
 
-    // Pinky remaps
-    //// Caps is hyper
-    //// Tab/Escape are swapped
-    key <CAPS> { [ Alt_L ] };
-    modifier_map Mod1 { <CAPS> };
+    // Caps is hyper, Tab/Escape swap
+    // key <CAPS> { [ Hyper_L ] };
+    // modifier_map Mod4 { <CAPS> };
+    key <CAPS> { [ Control_L ] };
+    modifier_map Control { <CAPS> };
     key <TAB>  { [ Escape ] };
     key <ESC>  { [ Tab ] };
     

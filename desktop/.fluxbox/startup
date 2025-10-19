@@ -114,9 +114,12 @@ fi
 # doing this in a subshell with sleep seems to be an idiom
 (
   sleep 5
+  setxkbmap realprog
+  while ! setxkbmap -query | grep -q "realprog"; do
+    sleep 0.1
+  done
   sxhkd
   caffeine
-  setxkbmap realprog
   ~/.local/bin/last_window_d
 ) &
 #-------------

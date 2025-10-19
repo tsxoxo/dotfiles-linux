@@ -25,6 +25,8 @@ __I dont remember__
 - bat
 - tldr
 
+- stow
+
 ### dev
 
 - nvm

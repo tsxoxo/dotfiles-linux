@@ -1,31 +1,43 @@
 # Switch between apps
-ctrl + w ; { h, u, j, m, i}
+# h = terminal
+# u, j, m = media = firefox, qutebrowser, video player
+# i, k, , = docs = image viewer, pdf
+# p, ;, ' = etc = password
+# possibly use kitty -e tmux new-session -A -s main
+alt + w ; { h, u, j, m, i, k}
   wmctrl -xa \ 
   { \
-    kitty || kitty, \
+    kitty || kitty -e tmux, \
     firefox || firefox, \
     qutebrowser || qutebrowser, \
     mpv || mpv, \
-    nomacs || nomacs \
+    nomacs || nomacs, \
+    zathura || zathura, \
   }
 
 # Switch to last focused window
 # relies on daemon started via ~/.fluxbox/startup: ~/.local/bin/last_window_d
-ctrl + w ; w
-  xdotool windowactivate "$(cat ~/.last_window)" 2>/dev/null || :
+# alt + w ; w
+#   xdotool windowactivate "$(cat ~/.last_window)" 2>/dev/null || :
 
-# Reloading various configs
-ctrl + dollar ; r ; {s,f,k}
+# app launcher
+# copied from bspwm example — use @ release event because dmenu tries to grab keyboard: https://github.com/baskerville/sxhkd/issues/59
+super + @space
+  rofi -show drun >/dev/null
+
+# Reload
+alt + dollar ; r ; {s,f,k,w}
   { \
     pkill -USR1 -x sxhkd; notify-send -t 1500 'sxhkd' 'Reloaded config', \
     fluxbox-remote reconfigure; notify-send -t 1500 'fluxbox' 'Reloaded config', \
-    pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config' \
+    pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
+    bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted'
   }
 
 ctrl + dollar ; t
   notify-send -t 5000 "Today is wow the time is now" "$(date +%c)"
 
-# Media keys: prev, play, next
+# Media keys
 XF86AudioPrev
     playerctl previous
 
@@ -35,10 +47,125 @@ XF86AudioPlay
 XF86AudioNext
     playerctl next
 
+# QUESTION: Can we show a notification?
+XF86Audio{Raise,Lower}Volume
+  amixer -D pulse sset Master 5%{+,-}
+
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
 # Screenshots
-ctrl + dollar ; s ; {f,p}
+alt + dollar ; s ; {f,p}
     { \
     scrot $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took full screenshot', \
     scrot -s $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took partial screenshot', \
     }
 
+
+#############################################################
+# bspwm hotkeys
+#############################################################
+
+# close and kill
+super + q
+	bspc node -k
+#
+# # alternate between the tiled and monocle layout
+alt + w ; dollar
+	bspc desktop -l next
+#
+# # send the newest marked node to the newest preselected node
+# super + y
+# 	bspc node newest.marked.local -n newest.!automatic.local
+#
+# # swap the current node and the biggest window
+# super + g
+# 	bspc node -s biggest.window
+#
+# #
+# # state/flags
+# #
+#
+# # set the window state
+alt + w ; {t,f}
+	bspc node -t {tiled,fullscreen}
+#
+# # set the node flags
+# super + ctrl + {m,x,y,z}
+# 	bspc node -g {marked,locked,sticky,private}
+#
+# #
+# # focus/swap
+# #
+#
+# # focus the node in the given direction
+alt + w ; {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+#
+# # focus the node for the given path jump
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
+#
+# # focus the next/previous window in the current desktop
+# super + {_,shift + }c
+# 	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous window in the current desktop
+# this isn't easily repeatable using a chord
+alt + {_,shift + }Tab
+    bspc node -f {next,prev}.local.!hidden.window
+
+# # focus the next/previous desktop in the current monitor
+# super + bracket{left,right}
+# 	bspc desktop -f {prev,next}.local
+#
+# # focus the last node/desktop
+alt + w ; {w,d}
+	bspc {node,desktop} -f last
+#
+# # focus the older or newer node in the focus history
+# super + {o,i}
+# 	bspc wm -h off; \
+# 	bspc node {older,newer} -f; \
+# 	bspc wm -h on
+#
+# focus desktop
+alt + w ; {plus, bracketleft}
+  bspc desktop -f '^{1,2}'
+
+# send to desktop and follow
+alt + w ; alt + {plus, bracketleft}
+	bspc node -d '^{1,2}' --follow
+
+#
+# #
+# # preselect
+# #
+#
+# # preselect the direction
+# super + ctrl + {h,j,k,l}
+# 	bspc node -p {west,south,north,east}
+#
+# # preselect the ratio
+# super + ctrl + {1-9}
+# 	bspc node -o 0.{1-9}
+#
+# # cancel the preselection for the focused node
+# super + ctrl + space
+# 	bspc node -p cancel
+#
+# # cancel the preselection for the focused desktop
+# super + ctrl + shift + space
+# 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+#
+# #
+# # move/resize
+# #
+#
+# # expand a window by moving one of its side outward
+# super + alt + {h,j,k,l}
+# 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+#
+# # contract a window by moving one of its side inward
+# super + alt + shift + {h,j,k,l}
+# 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
