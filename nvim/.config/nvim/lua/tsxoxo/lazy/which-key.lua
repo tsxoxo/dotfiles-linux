@@ -11,6 +11,7 @@ return {
 		delay = 1000,
 		spec = {
 			{ "<leader>s", group = "[S]earch" },
+			{ "<leader>sv", group = "[V]im config" },
 			{ "<leader>f", group = "[F]ile" },
 			{ "<leader>q", group = "[Q]uickfix" },
 			-- From Kickstart

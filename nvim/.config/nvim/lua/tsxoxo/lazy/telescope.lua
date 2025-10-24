@@ -14,21 +14,11 @@ return {
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
-		local transform_mod = require("telescope.actions.mt").transform_mod
-
-		-- local trouble = require("trouble")
-		-- local trouble_telescope = require("trouble.sources.telescope")
-
-		-- or create your custom action
-		-- local custom_actions = transform_mod({
-		-- 	open_trouble_qflist = function(prompt_bufnr)
-		-- 		trouble.toggle("quickfix")
-		-- 	end,
-		-- })
 
 		telescope.setup({
 			defaults = {
-				path_display = { "smart" },
+				-- see :help telescope.setup()
+				path_display = { "truncate" },
 				mappings = {
 					n = {
 						-- attempt for a keybinding to delete a buffer.
@@ -99,10 +89,8 @@ return {
 			local result = ""
 			if is_git_repo() then
 				result = get_git_root()
-				-- return get_git_root()
 			else
 				result = vim.fn.expand("%:p:h")
-				-- return vim.fn.expand("%:p:h")
 			end
 			-- DEBUG
 			-- print(result)
@@ -118,8 +106,9 @@ return {
 		---- FUNCS
 		local function live_grep_from_project_git_root()
 			local opts = {}
-			vim.api.nvim_echo({ { "Current working directory: " .. vim.fn.getcwd() } }, false, {})
-			vim.api.nvim_echo({ { "Is git repo: " .. tostring(is_git_repo()) } }, false, {})
+			-- DEBUG
+			-- vim.api.nvim_echo({ { "Current working directory: " .. vim.fn.getcwd() } }, false, {})
+			-- vim.api.nvim_echo({ { "Is git repo: " .. tostring(is_git_repo()) } }, false, {})
 
 			if is_git_repo() then
 				opts = {
@@ -159,9 +148,10 @@ return {
 
 		-- KEYMAPS
 		local builtin = require("telescope.builtin")
+		local nvim_config_dir = vim.fn.expand("~/dotfiles/nvim")
 		-- Files
 		vim.keymap.set("n", "<leader>sf", find_files_from_project_git_root, { desc = "[f]iles" })
-		vim.keymap.set("n", "<leader>si", find_hidden_files_from_project_git_root, { desc = "[i]nclude hidden files" })
+		vim.keymap.set("n", "<leader>s.", find_hidden_files_from_project_git_root, { desc = "[i]nclude hidden files" })
 		-- vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "Telescope git files" })
 		vim.keymap.set("n", "<leader>sr", "<cmd>Telescope oldfiles<cr>", { desc = "[r]ecent files" })
 		vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[b]uffers" })
@@ -176,7 +166,17 @@ return {
 		-- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 		-- Dotfiles
 		vim.keymap.set("n", "<leader>sd", function()
-			builtin.find_files({ cwd = "/Users/me/dotfiles/" })
+			builtin.find_files({ cwd = "$HOME/dotfiles/" })
 		end, { desc = "[d]otfiles" })
+		vim.keymap.set("n", "<leader>svs", function()
+			builtin.live_grep({
+				cwd = nvim_config_dir,
+			})
+		end, { desc = "[s]tring" })
+		vim.keymap.set("n", "<leader>svf", function()
+			builtin.find_files({
+				cwd = nvim_config_dir,
+			})
+		end, { desc = "[f]iles" })
 	end,
 }

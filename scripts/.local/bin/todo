@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# todo
+# Returns freshest todo note.
+#
+# NOTE: also possible to do with find?
+
+TODO_DIR="/home/tom/docs/todo"
+FRESHEST_TIMESTAMP=0
+FRESHEST_FILE=
+
+# prevent glob expansion when no files are found
+shopt -s nullglob
+
+for FILE in "$TODO_DIR"/*.md; do
+  # %X -- time of last access
+  # %W -- time of file birth
+  TIMESTAMP=$(stat --format="%W" "$FILE")
+
+  if [[ "$TIMESTAMP" -gt "$FRESHEST_TIMESTAMP" ]]; then
+    FRESHEST_TIMESTAMP="$TIMESTAMP"
+    FRESHEST_FILE="$FILE"
+  fi
+
+done
+
+if [[ -z "$FRESHEST_FILE" ]]; then
+  echo "ERROR: NO FILE FOUND in $TODO_DIR" >&2
+  exit 100
+fi
+
+echo "$FRESHEST_FILE"
+exit 0

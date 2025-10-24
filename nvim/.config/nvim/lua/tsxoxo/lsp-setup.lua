@@ -6,6 +6,7 @@
 --
 
 vim.lsp.enable({
+	"clangd",
 	"cssls",
 	-- "emmet_ls",
 	"vtsls",
@@ -96,5 +97,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			noremap = true,
 			desc = "Show line diagnostics",
 		})
+
+		-- vim.keymap.set("n", "<leader>cc", ":w<CR>:!make %:r && exec %:r<CR>")
+
+		vim.keymap.set("n", "<leader>cc", function()
+			local filename = vim.fn.expand("%:t:r")
+			vim.cmd("w")
+			vim.cmd("!make " .. filename .. " && ./" .. filename)
+		end)
 	end,
 })

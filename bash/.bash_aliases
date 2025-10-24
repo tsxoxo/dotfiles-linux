@@ -7,6 +7,7 @@ alias vimconf='nvim ~/dotfiles/nvim/.config/nvim/'
 alias bashconf='nvim ~/.bashrc'
 alias bashalias='nvim ~/.bash_aliases'
 alias aliasconf='nvim ~/.bash_aliases'
+alias aconf='nvim ~/.bash_aliases'
 alias kitconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
 alias kittyconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
 alias tmuxconf='nvim ~/dotfiles/tmux/.config/tmux/tmux.conf'
@@ -19,7 +20,29 @@ alias fluxconf='nvim ~/.fluxbox/'
 alias tintconf='nvim ~/.config/tint2/'
 
 # docs
-alias docs='nvim ~/docs'
+alias docs='nvim ~/docs/'
+alias uni='nvim ~/dev/hpi/'
+alias devdocs='nvim ~/docs/dev/notes/'
+alias ddocs='nvim ~/docs/dev/notes/'
+
+# todos
+alias todos='nvim ~/docs/todo/'
+alias todo=nvim_cd_todo
+
+nvim_cd_todo() {
+  FILE=$(~/.local/bin/todo)
+  nvim -c "cd ${FILE%/*}" "$FILE"
+}
+
+# music
+alias mq='nvim ~/music/queue.md'
+alias queue='nvim ~/music/queue.md'
+
+## uni
+
+alias hpidocs='nvim ~/dev/hpi'
+alias hpi='nvim ~/dev/hpi'
+alias hpimath='nvim ~/dev/hpi/s1/math1/'
 
 # abbreviations
 alias v=nvim
@@ -61,11 +84,12 @@ dutop() {
 }
 
 eza_col_icons() {
-  command eza --oneline --all --reverse --sort=name --group-directories-first --smart-group --no-permissions "$@"
+  command eza --oneline --all --reverse --sort=name --group-directories-first --smart-group "$@"
 }
 
 alias eza="eza_col_icons"
-alias l="eza_col_icons"
+alias l="eza_col_icons --long"
+alias ls="eza_col_icons --long"
 alias ezal="eza_col_icons --long"
 
 # git

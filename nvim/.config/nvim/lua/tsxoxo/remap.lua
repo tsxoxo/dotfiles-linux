@@ -139,6 +139,7 @@ vim.keymap.set("v", "<leader>cx", ":lua<CR>", { desc = "Execute selected region 
 -------------
 -- Usage:
 -- Place cursor anywhere on like with a commented heading and press the keys.
+-- TODO: make this language specific: in config files this should produce '#---' etc.
 vim.keymap.set("n", "<leader>gt", "A --" .. esc .. "yyPVr-yyjp", { desc = "Create framed heading" })
 
 -- LANGUAGE SPECIFIC

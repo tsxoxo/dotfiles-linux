@@ -3,14 +3,6 @@
 	email = tsxoxo@proton.me
 [core]
 	editor = nvim
-[alias]
-	a = add
-	c = commit
-	st = status
-	co = checkout
-	pom = push origin master
-    acp = "!f() { msg='$*'; git add . && git commit -m $msg && git push origin tom_sz; }; f"
-
 
 [credential "https://dev.azure.com"]
 	useHttpPath = true

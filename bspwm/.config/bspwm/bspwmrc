@@ -21,4 +21,4 @@ bspc config left_monocle_padding 12
 
 bspc rule -a "*" desktop='^2' follow=on
 bspc rule -a kitty desktop='^1' follow=on
-bspc rule -a Zathura state=tiled
+bspc rule -a Zathura state=fullscreen
