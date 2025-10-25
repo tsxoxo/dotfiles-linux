@@ -17,6 +17,7 @@ alias bspconf='nvim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
 alias qbconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias quteconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias yazconf='nvim ~/.config/yazi/'
+alias yazkeys='nvim ~/.config/yazi/keymap.toml'
 
 ### obsolete
 alias fluxconf='nvim ~/.fluxbox/'
