@@ -16,6 +16,9 @@ alias sxconf='nvim ~/dotfiles/sxhkd/.config/sxhkd/sxhkdrc'
 alias bspconf='nvim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
 alias qbconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias quteconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
+alias yazconf='nvim ~/.config/yazi/'
+
+### obsolete
 alias fluxconf='nvim ~/.fluxbox/'
 alias tintconf='nvim ~/.config/tint2/'
 
@@ -24,6 +27,8 @@ alias docs='nvim ~/docs/'
 alias uni='nvim ~/dev/hpi/'
 alias devdocs='nvim ~/docs/dev/notes/'
 alias ddocs='nvim ~/docs/dev/notes/'
+
+alias latexhow='nvim ~/dev/hpi/s1/math1/docs/latex-howto-aus-vorkurs.tex'
 
 # todos
 alias todos='nvim ~/docs/todo/'

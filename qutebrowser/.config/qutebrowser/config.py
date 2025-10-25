@@ -66,8 +66,8 @@ c.content.notifications.enabled = False
 # SEARCH --
 #----------
 c.url.searchengines = {
-    'DEFAULT':  'https://duckduckgo.com/?ia=web&q={}',
-    '!dd':      'https://thefreedictionary.com/{}',
+    'DEFAULT':  'https://www.ecosia.org/search?method=index&q={}',
+    '!dd':      'https://duckduckgo.com/?ia=web&q={}',
     'g':        'https://google.com/search?hl=en&q={}',
     '!gh':      'https://github.com/search?o=desc&q={}&s=stars',
     '!gist':    'https://gist.github.com/search?q={}',
