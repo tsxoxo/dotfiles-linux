@@ -1,0 +1,4 @@
+#!/bin/env bash
+# Convert binary to decimal
+
+python3 -c "print(int('$1', 2))"

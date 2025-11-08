@@ -1,1 +1,12 @@
 set selection-clipboard clipboard
+
+# simpler scrolling
+# alternative ideas below
+map j navigate next
+map k navigate previous
+# map i feedkeys "P <S-J>"
+# snap_to_page && navigate next
+
+# map <S-j> scroll down
+map <S-j> zoom in
+map <S-k> scroll up

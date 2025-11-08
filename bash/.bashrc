@@ -25,7 +25,10 @@ shopt -s cmdhist
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ### Environment variables
-export PATH="$HOME/.local/bin:$PATH"
+# this is already in ~/.profile but that does not fire for new panes in tmux
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
 
 # XDG
 ### (these might be the defaults but I like them explicit.)

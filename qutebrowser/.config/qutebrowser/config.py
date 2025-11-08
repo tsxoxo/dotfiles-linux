@@ -177,17 +177,18 @@ c.fonts.web.family.serif = 'monospace'
 c.fonts.web.family.standard = 'monospace'
 
 # dark mode setup
+## toggle
+config.bind(',vd', 'config-cycle colors.webpage.darkmode.enabled True False')
+
+## options
 c.colors.webpage.preferred_color_scheme = 'dark'
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.algorithm = 'lightness-hsl'
 c.colors.webpage.darkmode.contrast = -.022
 c.colors.webpage.darkmode.threshold.foreground = 150
 c.colors.webpage.darkmode.threshold.background = 100
-c.colors.webpage.darkmode.policy.images = 'always'
-# c.colors.webpage.darkmode.grayscale.images = 0.35
+c.colors.webpage.darkmode.policy.images = 'never'
 config.set('colors.webpage.darkmode.enabled', False, 'file://*')
-config.bind(',vd', 'config-cycle colors.webpage.darkmode.enabled True False')
-# c.colors.webpage.bg = 'red'
 
 # styles, cosmetics
 # c.content.user_stylesheets = ["~/.config/qutebrowser/styles/youtube-tweaks.css"]

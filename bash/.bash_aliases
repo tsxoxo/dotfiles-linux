@@ -3,6 +3,8 @@
 # configs
 alias conf='nvim ~/dotfiles/'
 alias dotconf='nvim ~/dotfiles/'
+alias dots='nvim ~/dotfiles/'
+alias dotfiles='nvim ~/dotfiles/'
 alias vimconf='nvim ~/dotfiles/nvim/.config/nvim/'
 alias bashconf='nvim ~/.bashrc'
 alias bashalias='nvim ~/.bash_aliases'
@@ -11,27 +13,41 @@ alias aconf='nvim ~/.bash_aliases'
 alias kitconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
 alias kittyconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
 alias tmuxconf='nvim ~/dotfiles/tmux/.config/tmux/tmux.conf'
-alias keyconf='sudoedit nvim /usr/share/X11/xkb/symbols/realprog'
-alias sxconf='nvim ~/dotfiles/sxhkd/.config/sxhkd/sxhkdrc'
+alias keyconf='sudoedit /usr/share/X11/xkb/symbols/realprog'
+alias sxconf='edit_dotfiles "/sxhkd/.config/sxhkd/sxhkdrc"'
 alias bspconf='nvim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
 alias qbconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias quteconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias yazconf='nvim ~/.config/yazi/'
 alias yazkeys='nvim ~/.config/yazi/keymap.toml'
 
+edit_dotfiles() {
+  DOTFILES="$HOME/dotfiles"
+
+  nvim -c "cd $DOTFILES" "$DOTFILES$1"
+}
+
 ### obsolete
 alias fluxconf='nvim ~/.fluxbox/'
 alias tintconf='nvim ~/.config/tint2/'
 
 # docs
+export DEV_DOCS="$HOME/docs/dev/notes"
+
 alias docs='nvim ~/docs/'
 alias uni='nvim ~/dev/hpi/'
-alias devdocs='nvim ~/docs/dev/notes/'
-alias ddocs='nvim ~/docs/dev/notes/'
+alias devdocs='nvim "$DEV_DOCS"' # " inside ' == var expands on runtime
+alias ddocs='nvim "$DEV_DOCS"'
 
-alias latexhow='nvim ~/dev/hpi/s1/math1/docs/latex-howto-aus-vorkurs.tex'
+alias latexdocs='nvim "$DEV_DOCS"/latex/'
+alias lxdocs='nvim "$DEV_DOCS"/latex/'
+alias lxhow='nvim "$DEV_DOCS"/latex/'
+alias latexhow='nvim "$DEV_DOCS"/latex/'
 
-# todos
+alias twatch="typst w --open zathura "
+alias typwatch="typst w --open zathura "
+
+## todos
 alias todos='nvim ~/docs/todo/'
 alias todo=nvim_cd_todo
 
@@ -40,7 +56,7 @@ nvim_cd_todo() {
   nvim -c "cd ${FILE%/*}" "$FILE"
 }
 
-# music
+## music
 alias mq='nvim ~/music/queue.md'
 alias queue='nvim ~/music/queue.md'
 
@@ -61,6 +77,7 @@ alias ....='cd ../../..'
 
 # useful defaults
 alias mv="mv -iv"       # dont overwrite stuff, show results
+alias cp="cp -iv"       # dont overwrite stuff, show results
 alias mkdir="mkdir -pv" # also dont overwrite stuff, show results
 alias rm="rm -Iv"       # confirm when >3; verbose
 
@@ -89,14 +106,19 @@ dutop() {
   du -sh "${1:-.}"/* 2>/dev/null | sort -hr | head -10
 }
 
+# ls
+
 eza_col_icons() {
-  command eza --oneline --all --reverse --sort=name --group-directories-first --smart-group "$@"
+  command eza --oneline --reverse --sort=name --group-directories-first --smart-group "$@"
 }
 
 alias eza="eza_col_icons"
 alias l="eza_col_icons --long"
 alias ls="eza_col_icons --long"
 alias ezal="eza_col_icons --long"
+alias lall="eza_col_icons --all"
+alias ldirs="l -D"
+alias lsize="l --total-size --sort=size"
 
 # git
 alias g="git"
@@ -106,6 +128,9 @@ alias gaa="git add --all"
 alias gc="git commit --verbose"
 alias gp="git push"
 alias gpv="git push --verbose"
+
+# hpi
+alias hpigds="y ~/dev/hpi/s1/gds/"
 
 # fun logs to try out
 alias glgg="git log --graph"

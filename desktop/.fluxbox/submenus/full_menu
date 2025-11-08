@@ -130,7 +130,7 @@
 [exec] (Hardinfo2 ) { hardinfo2 } Categories=System;Utility;
 [exec] (Htop ) { x-terminal-emulator -e htop } Categories=System;Monitor;ConsoleOnly;
 [exec] (Job Scheduler ) { job-scheduler } Categories=System;MX-Tools
-[exec] (kitty ) { /home/tom/.local/kitty.app/bin/kitty --detach -e tmux } Categories=System;TerminalEmulator;
+[exec] (kitty ) { /home/tom/.local/kitty.app/bin/kitty -e tmux } Categories=System;TerminalEmulator;
 [exec] (LightDM GTK+ Greeter settings ) { lightdm-gtk-greeter-settings-pkexec } Categories=GNOME;GTK;Settings;System;Utility;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 [exec] (Look ) { mxfb-look } Categories=System;X-MXFB-Tools;
 [exec] (Manual ) { mxfb-help } Categories=System;

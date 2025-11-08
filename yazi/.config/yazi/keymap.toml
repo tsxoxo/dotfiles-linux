@@ -28,3 +28,14 @@ desc = "Go ~/docs"
 on = [ "g", "u" ]
 run = 'cd ~/dev/hpi/s1/'
 desc = "Go uni"
+
+[[mgr.prepend_keymap]]
+on = [ "g", "n" ]
+run = 'cd ~/docs/dev/notes/'
+desc = "Go devnotes"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "f" ]
+# run  = 'search --via=fd --args="-t f --search-path ~/docs --search-path ~/dev"'
+run  = 'search --via=fd --args="--search-path /home/tom/docs --search-path /home/tom/dev"'
+desc = "Search frequent files"

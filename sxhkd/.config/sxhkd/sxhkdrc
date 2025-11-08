@@ -1,31 +1,4 @@
-# Switch between apps
-# h = terminal
-# u, j, m = media = firefox, qutebrowser, video player
-# i, k, , = docs = image viewer, pdf
-# p, ;, ' = etc = password
-# possibly use kitty -e tmux new-session -A -s main
-alt + w ; { h, u, j, m, i, k}
-  wmctrl -xa \ 
-  { \
-    kitty || kitty -e tmux, \
-    firefox || firefox, \
-    qutebrowser || qutebrowser, \
-    mpv || mpv, \
-    nomacs || nomacs, \
-    zathura || zathura, \
-  }
-
-# Switch to last focused window
-# relies on daemon started via ~/.fluxbox/startup: ~/.local/bin/last_window_d
-# alt + w ; w
-#   xdotool windowactivate "$(cat ~/.last_window)" 2>/dev/null || :
-
-# app launcher
-# copied from bspwm example — use @ release event because dmenu tries to grab keyboard: https://github.com/baskerville/sxhkd/issues/59
-super + @space
-  rofi -show drun >/dev/null
-
-# Reload
+# Reload (after modifying config)
 alt + dollar ; r ; {s,f,k,w}
   { \
     pkill -USR1 -x sxhkd; notify-send -t 1500 'sxhkd' 'Reloaded config', \
@@ -34,10 +7,11 @@ alt + dollar ; r ; {s,f,k,w}
     bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted'
   }
 
-ctrl + dollar ; t
+# Show date
+alt + dollar ; t
   notify-send -t 5000 "Today is wow the time is now" "$(date +%c)"
 
-# Media keys
+# MEDIA KEYS
 XF86AudioPrev
     playerctl previous
 
@@ -69,17 +43,14 @@ alt + dollar ; s ; {f,p}
 # example file: `/usr/share/doc/bspwm/examples/sxhkdrc`
 # NOTE: use `gf` on above path to open
 
+# app launcher
+# copied from bspwm example — use @ release event because dmenu tries to grab keyboard: https://github.com/baskerville/sxhkd/issues/59
+super + @space
+  rofi -show drun >/dev/null
+
 # close and kill
 super + q
 	bspc node -k
-
-# alternate between the tiled and monocle layout
-alt + w ; dollar
-    bspc desktop -l next
-
-# alternate between vert and hori split
-alt + w ; bar
-    bspc node @parent -R 90
 
 #----------------
 # state/flags --
@@ -89,35 +60,63 @@ alt + w ; bar
 alt + w ; {t,f}
 	bspc node -t {tiled,fullscreen}
 
+# alternate between the tiled and monocle layout
+alt + w ; dollar
+    bspc desktop -l next
+
+# alternate between vert and hori split
+alt + w ; bar
+    bspc node @parent -R 90
+
 #---------------
-# focus/swap --
+#----focus------
 #---------------
 
+# Switch between apps
+# h = terminal
+# u, j, m = media = firefox, qutebrowser, video player
+# i, k, , = docs = image viewer, pdf
+# p, ;, ' = etc = password
+# possibly use kitty -e tmux new-session -A -s main
+alt + w ; { h, u, j, m, i, k}
+  wmctrl -xa \ 
+  { \
+    kitty || kitty -e tmux, \
+    firefox || firefox, \
+    qutebrowser || qutebrowser, \
+    mpv || mpv, \
+    nomacs || nomacs, \
+    zathura || zathura, \
+  }
 
-# focus/move node
+# focus desktop
+alt + {j,k,l}
+  bspc desktop -f '^{1,2,3}'
+
+# focus last node
+alt + h
+	bspc node -f last
+
+# focus/move node by direction
 alt + w ; {_,alt + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the next/previous window in the current desktop
 # this isn't easily repeatable using a chord
-alt + {_,shift + }Tab
+alt + {comma, period} 
     bspc node -f {next,prev}.local.!hidden.window
 
-# focus the last node/desktop
-alt + w ; {w,d}
-	bspc {node,desktop} -f last
+# focus the next/previous window of same app
+alt + w ; {comma, period}
+    bspc node -f {next,prev}.local.same_class.window
 
-# focus desktop
-alt + w ; {plus, bracketleft, braceleft}
-  bspc desktop -f '^{1,2,3}'
+#------------------
+#---move/resize----
+#------------------
 
 # send to desktop and follow
-alt + w ; alt + {plus, bracketleft, braceleft}
+alt + w; {plus, bracketleft, braceleft}
 	bspc node -d '^{1,2,3}' --follow
-
-#------------------
-#----- resize -----
-#------------------
 
 # expand a window by moving one of its side outward
 alt + w ; shift + {Left,Down,Up,Right}

@@ -125,6 +125,9 @@ vim.keymap.set("n", "<leader>g#", "60i#<Esc>", { desc = "#####" })
 vim.keymap.set("n", "<leader>g=", "60i=<Esc>", { desc = "=====" })
 vim.keymap.set("n", "<leader>g-", "60i-<Esc>", { desc = "-----" })
 
+-- For code in markdown: Surround line with ``
+vim.keymap.set("n", "<leader>g`", "0ys$`", { remap = true, desc = "Surround line with `` (markdown)" })
+
 local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
 
 -- Lua

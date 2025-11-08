@@ -21,4 +21,7 @@ bspc config left_monocle_padding 12
 
 bspc rule -a "*" desktop='^2' follow=on
 bspc rule -a kitty desktop='^1' follow=on
-bspc rule -a Zathura state=fullscreen
+# seems to focus despite follow=off
+bspc rule -a Zathura desktop='^1' state=tiled follow=off
+# failed experiment: only apply rule to certain zathura windows based on path in window title. prob use 'external rules command' for this
+# bspc rule -a "*:*:/home/tom/docs/job/applications/werkstudent/de_HPI_kursmanagement_moti.pdf" desktop='^1' state=tiled
