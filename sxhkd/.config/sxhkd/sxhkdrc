@@ -64,7 +64,7 @@ alt + w ; {t,f}
 alt + w ; dollar
     bspc desktop -l next
 
-# alternate between vert and hori split
+# alternate between vertical and horizontal split
 alt + w ; bar
     bspc node @parent -R 90
 
@@ -77,11 +77,10 @@ alt + w ; bar
 # u, j, m = media = firefox, qutebrowser, video player
 # i, k, , = docs = image viewer, pdf
 # p, ;, ' = etc = password
-# possibly use kitty -e tmux new-session -A -s main
 alt + w ; { h, u, j, m, i, k}
   wmctrl -xa \ 
   { \
-    kitty || kitty -e tmux, \
+    kitty || kitty , \
     firefox || firefox, \
     qutebrowser || qutebrowser, \
     mpv || mpv, \
@@ -125,3 +124,11 @@ alt + w ; shift + {Left,Down,Up,Right}
 # contract a window by moving one of its side inward
 alt + w ; shift + ctrl + {Left,Down,Up,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# hide window
+alt + w ; asterisk
+  bspc node --flag hidden=on
+# unhide (first window off hidden stack?)
+alt + w ; alt + asterisk
+  bspc node $(bspc query -N -d focused -n .hidden | head -n1) --flag hidden=off
+

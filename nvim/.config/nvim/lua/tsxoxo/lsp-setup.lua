@@ -103,7 +103,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>cc", function()
 			local filename = vim.fn.expand("%:t:r")
 			vim.cmd("w")
-			vim.cmd("!make " .. filename .. " && ./" .. filename)
+			-- TODO: make this more convenient (close buffer more easily or re-run the command in same terminal if one is already open)
+			-- possibly useful apis:
+			-- vim.api.nvim_list_bufs()
+			-- vim.api.nvim_buf_get_name()
+			-- vim_api.nvim_open_term() -- returns channel id or 0 on error
+			-- if vim.api.nvim_buf_get_option(buf, 'buftype') == 'terminal' then buffer is a terminal
+			-- echo join(map(filter(nvim_list_bufs(), {i,v -> getbufvar(v,"&buftype") == 'terminal'}), {i,v -> [v,getbufvar(v,"term_title")]}), "\n")
+			-- echo bufname("file2")	" name of buffer where "file2" matches.
+			-- recipe in vimscript: https://neovim.discourse.group/t/how-can-i-check-if-a-terminal-exist-before-i-create-one/821/6
+			vim.cmd("vsplit | terminal make " .. filename .. " && ./" .. filename)
+			-- alternative:
+			-- vim.fn.system("tmux send-keys -t 1 'make " .. filename .. " && ./" .. filename .. "' Enter")
+			--
+			-- old version (non-interactie):
+			-- vim.cmd("!make " .. filename .. " && ./" .. filename)
 		end)
 	end,
 })

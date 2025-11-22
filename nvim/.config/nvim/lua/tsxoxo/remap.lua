@@ -55,8 +55,8 @@ create_quick_slot("p")
 -----------------------------
 -- INTRA-BUFFER NAVIGATION --
 -----------------------------
-vim.keymap.set({ "n", "v" }, "<M-d>", "<C-d>zz", { desc = "Move down half a page while keeping cursor centered." })
-vim.keymap.set({ "n", "v" }, "<M-u>", "<C-u>zz", { desc = "Move up half a page while keeping cursor centered." })
+vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { desc = "Move down half a page while keeping cursor centered." })
+vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { desc = "Move up half a page while keeping cursor centered." })
 vim.keymap.set("i", "<M-l>", "<Right> ", { desc = "Move cursor from between brackets." })
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Leave insert mode" })
 

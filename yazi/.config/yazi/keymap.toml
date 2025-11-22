@@ -1,9 +1,22 @@
+# Yank/paste
+[[mgr.prepend_keymap]]
+on  = "y"
+run = [ 'shell -- echo "$@" | xclip -i -selection clipboard -t text/uri-list', "yank" ]
+desc = "Yank (also to system clipboard)"
+
+[[mgr.prepend_keymap]]
+on   = "p"
+run  = "paste --follow"
+desc = "Paste and follow symlink (copy target not link)"
+
+# Shell
 [[mgr.prepend_keymap]]
 on   = "!"
 for  = "unix"
 run  = 'shell "$SHELL" --block'
 desc = "Open $SHELL here"
 
+# Jumping places
 [[mgr.prepend_keymap]]
 on = [ "g", "r" ]
 run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
@@ -35,7 +48,7 @@ run = 'cd ~/docs/dev/notes/'
 desc = "Go devnotes"
 
 [[mgr.prepend_keymap]]
-on   = [ "g", "f" ]
+on   = [ "g", "g" ]
 # run  = 'search --via=fd --args="-t f --search-path ~/docs --search-path ~/dev"'
 run  = 'search --via=fd --args="--search-path /home/tom/docs --search-path /home/tom/dev"'
 desc = "Search frequent files"

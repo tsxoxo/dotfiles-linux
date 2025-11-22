@@ -12,7 +12,7 @@ alias aliasconf='nvim ~/.bash_aliases'
 alias aconf='nvim ~/.bash_aliases'
 alias kitconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
 alias kittyconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
-alias tmuxconf='nvim ~/dotfiles/tmux/.config/tmux/tmux.conf'
+alias tmuxconf='edit_dotfiles "/tmux/.config/tmux/tmux.conf"'
 alias keyconf='sudoedit /usr/share/X11/xkb/symbols/realprog'
 alias sxconf='edit_dotfiles "/sxhkd/.config/sxhkd/sxhkdrc"'
 alias bspconf='nvim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
@@ -38,6 +38,8 @@ alias docs='nvim ~/docs/'
 alias uni='nvim ~/dev/hpi/'
 alias devdocs='nvim "$DEV_DOCS"' # " inside ' == var expands on runtime
 alias ddocs='nvim "$DEV_DOCS"'
+alias dnotes='nvim "$DEV_DOCS"'
+alias devnotes='nvim "$DEV_DOCS"'
 
 alias latexdocs='nvim "$DEV_DOCS"/latex/'
 alias lxdocs='nvim "$DEV_DOCS"/latex/'
@@ -46,6 +48,8 @@ alias latexhow='nvim "$DEV_DOCS"/latex/'
 
 alias twatch="typst w --open zathura "
 alias typwatch="typst w --open zathura "
+
+alias fehh="feh -d -Z"
 
 ## todos
 alias todos='nvim ~/docs/todo/'
@@ -57,8 +61,8 @@ nvim_cd_todo() {
 }
 
 ## music
-alias mq='nvim ~/music/queue.md'
-alias queue='nvim ~/music/queue.md'
+MUSIC_DOCS="$HOME/docs/music"
+alias musq='nvim $MUSIC_DOCS/recs'
 
 ## uni
 
@@ -87,8 +91,9 @@ alias xclip="xclip -selection clipboard"
 alias r="fc -s" # repeat last command: `r`; ...that starts with cc: `r cc`
 
 # python
-alias pinit=_pinit
-alias pact='source .venv/bin/activate'
+alias py=python3
+alias pyinit=_pinit
+alias pyact='source .venv/bin/activate'
 
 _pinit() {
   mkdir -p ./.venv

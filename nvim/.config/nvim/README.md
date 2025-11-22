@@ -35,11 +35,6 @@ gi jump to last edit and switch to insert mode
 :saveas new_filename " Write copy to new file, and switch to it
 :saveas! new_filename " Force overwrite if file exists
 
-### Copy from command line
-
-`<C-f>` In command mode: open command history window
-`q:` From normal mode: open command history window
-
 ### Get CWD of current buffer
 
 -- Get directory of current buffer

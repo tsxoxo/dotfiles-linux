@@ -1,0 +1,19 @@
+[mgr]
+show_hidden = true
+
+# Make Firefox available to open PDFs (can edit and view annotations)
+# See https://yazi-rs.github.io/docs/configuration/yazi/#opener
+[opener]
+firefox = [
+  { run = 'firefox "$@"', orphan = true, desc = 'firefox' },
+]
+edit_in_doc = [
+  { run = "~/.local/bin/yazi_open_in_tmux_window ${@}", block = false, desc = 'open in doc'}
+]
+
+[open]
+prepend_rules = [
+	# Multiple openers for a single rule
+	{ name = "*.pdf", use = [ "open", "firefox" ] },
+	{ mime = "text/*", use = "edit_in_doc" },
+]

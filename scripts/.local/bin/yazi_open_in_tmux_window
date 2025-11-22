@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+file="$1"
+window="doc"
+session="$(tmux display-message -p '#S')"
+
+echo "file: $file"
+
+# open nvim instance or add buffer if nvim already running
+# if tmux list-panes -f '#{==:#{pane_current_command},man}' -t ":doc"
+if tmux display-message -p -t ":doc" '#{?#{==:#{pane_current_command},nvim},true,false}'; then
+  tmux send-keys -t "$session:$window" ":edit $file" Enter >/dev/null
+else
+  tmux send-keys -t "$session:$window" "nvim $file" Enter
+fi
+
+# switch to window
+tmux selectw -t "$session:$window" >/dev/null

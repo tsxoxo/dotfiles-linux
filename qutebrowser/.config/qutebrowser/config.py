@@ -95,7 +95,9 @@ config.bind(',r', 'config-source') # reload config
 config.bind(',.', 'config-cycle tabs.show always never;; config-cycle statusbar.show always in-mode')
 
 # switch tabs on realprog keyboard layout
-config.bind(',+', 'tab-focus 1')
+# defaults: 
+# jump to first tab: g^
+# jump to last tab: g$
 config.bind(',[', 'tab-focus 2')
 config.bind(',{', 'tab-focus 3')
 config.bind(',(', 'tab-focus 4')
@@ -103,7 +105,6 @@ config.bind(',&', 'tab-focus 5')
 config.bind(',=', 'tab-focus 6')
 config.bind(',)', 'tab-focus 7')
 config.bind(',}', 'tab-focus 8')
-config.bind(',]', 'tab-focus -1')
 
 # hop between last used tabs
 config.bind(',j', 'tab-focus stack-next')

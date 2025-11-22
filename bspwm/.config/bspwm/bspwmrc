@@ -14,10 +14,10 @@ bspc config borderless_monocle true
 bspc config gapless_monocle false
 bspc config single_monocle true
 
-bspc config top_monocle_padding 12
-bspc config right_monocle_padding 12
-bspc config bottom_monocle_padding 12
-bspc config left_monocle_padding 12
+bspc config top_monocle_padding 24
+bspc config right_monocle_padding 36
+bspc config bottom_monocle_padding 24
+bspc config left_monocle_padding 36
 
 bspc rule -a "*" desktop='^2' follow=on
 bspc rule -a kitty desktop='^1' follow=on
