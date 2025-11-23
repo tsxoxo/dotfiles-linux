@@ -77,3 +77,6 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg/rgrc"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# fix no menus in ghidra (java app expecting window reparenting)
+export _JAVA_AWT_WM_NONREPARENTING=1

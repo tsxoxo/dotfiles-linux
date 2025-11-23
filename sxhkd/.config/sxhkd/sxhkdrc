@@ -57,8 +57,8 @@ super + q
 #----------------
 
 # set the window state
-alt + w ; {t,f}
-	bspc node -t {tiled,fullscreen}
+alt + w ; {t,f,l}
+	bspc node -t {tiled,fullscreen,floating}
 
 # alternate between the tiled and monocle layout
 alt + w ; dollar

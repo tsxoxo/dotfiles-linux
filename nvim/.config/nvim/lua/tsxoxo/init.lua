@@ -57,16 +57,17 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- cd into dir 'foo' when opening via 'nvim foo'
-vim.api.nvim_create_autocmd("TextChanged", {
-	desc = "Set cwd to follow directory shown in oil buffers.",
-	group = vim.api.nvim_create_augroup("OilAutoCwd", {}),
-	pattern = "oil:///*",
-	callback = function()
-		if vim.bo.filetype == "oil" then
-			vim.cmd.lcd(require("oil").get_current_dir())
-		end
-	end,
-})
+-- 2025-11-23: I find this odd and troubling so I disabled it.
+-- vim.api.nvim_create_autocmd("TextChanged", {
+-- 	desc = "Set cwd to follow directory shown in oil buffers.",
+-- 	group = vim.api.nvim_create_augroup("OilAutoCwd", {}),
+-- 	pattern = "oil:///*",
+-- 	callback = function()
+-- 		if vim.bo.filetype == "oil" then
+-- 			vim.cmd.lcd(require("oil").get_current_dir())
+-- 		end
+-- 	end,
+-- })
 
 -- Highlight when yanking (copying) text
 --  See `:help vim.highlight.on_yank()`

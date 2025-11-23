@@ -7,9 +7,9 @@ session="$(tmux display-message -p '#S')"
 echo "file: $file"
 
 # open nvim instance or add buffer if nvim already running
-# if tmux list-panes -f '#{==:#{pane_current_command},man}' -t ":doc"
-if tmux display-message -p -t ":doc" '#{?#{==:#{pane_current_command},nvim},true,false}'; then
-  tmux send-keys -t "$session:$window" ":edit $file" Enter >/dev/null
+# NOTE: expect $window to only have one pane
+if [[ $(tmux display-message -p -t ":$window" '#{==:#{pane_current_command},nvim}') == 1 ]]; then
+  tmux send-keys -t "$session:$window" ":edit $file" Enter
 else
   tmux send-keys -t "$session:$window" "nvim $file" Enter
 fi

@@ -19,9 +19,10 @@ bspc config right_monocle_padding 36
 bspc config bottom_monocle_padding 24
 bspc config left_monocle_padding 36
 
-bspc rule -a "*" desktop='^2' follow=on
 bspc rule -a kitty desktop='^1' follow=on
 # seems to focus despite follow=off
 bspc rule -a Zathura desktop='^1' state=tiled follow=off
 # failed experiment: only apply rule to certain zathura windows based on path in window title. prob use 'external rules command' for this
 # bspc rule -a "*:*:/home/tom/docs/job/applications/werkstudent/de_HPI_kursmanagement_moti.pdf" desktop='^1' state=tiled
+bspc rule -a ghidra-Ghidra desktop='^3' state=floating follow=off
+# bspc rule -a "*" desktop='^2' follow=on
