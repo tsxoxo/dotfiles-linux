@@ -19,6 +19,7 @@ return {
 		todo_comments.setup({
 			keywords = {
 				START_HERE = { icon = "👉", color = "hint" },
+				QUESTION = { icon = "?", color = "warning" },
 			},
 			highlight = {
 				comments_only = false,

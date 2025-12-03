@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# NOTE: not prod ready
-tmux new-session -s math -n main "cd ~/work/math-hw; bash" \; \
-  new-window -n doc "cd ~/work/math-hw; nvim ~/notes/math.md" \; \
-  new-window -n file "cd ~/work/math-hw; yazi"
+DOCUMENTS=$(xdg-user-dir DOCUMENTS)
+
+tmux new-session -d -s "$1" -n main -c "$DOCUMENTS" \; \
+  new-window -t "$1":2 -n doc -c "$DOCUMENTS" \; \
+  new-window -t "$1":3 -n file "/usr/local/bin/yazi" \; \
+  switch-client -t "$1"

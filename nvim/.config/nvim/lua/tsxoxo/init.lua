@@ -128,3 +128,43 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 		vim.notify("Lazy loaded: " .. vim.inspect(args.data), vim.log.levels.INFO)
 -- 	end,
 -- })
+--
+
+local exclude_ft = {
+	man = true,
+	help = true,
+}
+
+local exclude_bt = {
+	nofile = true,
+	terminal = true,
+}
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	pattern = "*",
+	callback = function()
+		if exclude_ft[vim.bo.filetype] then
+			return
+		end
+		if exclude_bt[vim.bo.buftype] then
+			return
+		end
+
+		local cwd
+		local ok, oil = pcall(require, "oil")
+		if ok and oil.get_current_dir then
+			cwd = oil.get_current_dir()
+		end
+
+		-- fallback: current buffer's parent
+		if not cwd or cwd == "" then
+			local bufname = vim.api.nvim_buf_get_name(0)
+			cwd = vim.fn.fnamemodify(bufname, ":h")
+		end
+
+		-- set cwd
+		if cwd and cwd ~= "" then
+			vim.cmd("cd " .. vim.fn.fnameescape(cwd))
+		end
+	end,
+})

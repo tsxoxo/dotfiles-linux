@@ -146,12 +146,22 @@ return {
 			require("telescope.builtin").find_files(opts)
 		end
 
+		local function bufdir()
+			local oil = require("oil")
+			local result = oil.get_current_dir() or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
+
+			return result
+		end
+
 		-- KEYMAPS
 		local builtin = require("telescope.builtin")
 		local nvim_config_dir = vim.fn.expand("~/dotfiles/nvim")
 
 		-- Files
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[f]iles" })
+		vim.keymap.set("n", "<leader>sc", function()
+			builtin.find_files({ cwd = bufdir() })
+		end, { desc = "[c]urrent dir" })
 		vim.keymap.set("n", "<leader>sg", find_files_from_project_git_root, { desc = "from [g]it root" })
 		vim.keymap.set("n", "<leader>sh", find_hidden_files_from_project_git_root, { desc = "[i]nclude hidden files" })
 		vim.keymap.set("n", "<leader>sr", "<cmd>Telescope oldfiles<cr>", { desc = "[r]ecent files" })
@@ -177,6 +187,9 @@ return {
 
 		-- grep
 		vim.keymap.set("n", "<leader>Ss", builtin.live_grep, { desc = "[s]tring" })
+		vim.keymap.set("n", "<leader>Sc", function()
+			builtin.live_grep({ cwd = bufdir() })
+		end, { desc = "[c]urrent dir" })
 		vim.keymap.set("n", "<leader>Sg", live_grep_from_project_git_root, { desc = "from [g]it root" })
 		vim.keymap.set("n", "<leader>Sd", function()
 			builtin.live_grep({ cwd = "$HOME/docs/" })

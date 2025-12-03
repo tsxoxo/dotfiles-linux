@@ -10,13 +10,16 @@ firefox = [
 qutebrowser = [
   { run = 'qutebrowser "$@"', orphan = true, desc = 'qutebrowser' },
 ]
+
+# NOTE: edit_in_doc does not work in filtered view, such as after running a
+# search. the arg that seems to be passed as $@ is the item that was selected
+# prior to running the search.
 edit_in_doc = [
   { run = '~/.local/bin/yazi_open_in_tmux_window "${@}"', block = false, desc = 'open in doc'}
 ]
 
 [open]
 prepend_rules = [
-	# Multiple openers for a single rule
 	{ name = "*.pdf", use = [ "open", "firefox" ] },
 	{ name = "*.html", use = [ "qutebrowser", "firefox" ] },
 	{ mime = "text/*", use = "edit_in_doc" },

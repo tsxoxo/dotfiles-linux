@@ -164,3 +164,23 @@ function y() {
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
   rm -f -- "$tmp"
 }
+
+# Time tracking
+tlogfile=$(xdg-user-dir DOCUMENTS)/time.log
+
+tin() {
+  # $1=project $2=description $3=tags
+  if [[ $# != 3 ]]; then
+    echo "Usage: tin <project> <description> <tags>"
+    return 1
+  fi
+  echo "$(date +%Y-%m-%d\ %H:%M)|START|$1|$2|$3" >>"$tlogfile"
+}
+
+tout() {
+  echo "$(date +%Y-%m-%d\ %H:%M)|STOP|||" >>"$tlogfile"
+}
+
+# shellcheck disable=SC2139
+alias tedit="v $tlogfile"
+alias tcat="bat $tlogfile"

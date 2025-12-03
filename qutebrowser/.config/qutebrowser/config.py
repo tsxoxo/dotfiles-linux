@@ -149,6 +149,9 @@ config.bind(';m', 'hint links spawn mpv {hint-url}')
 # config.bind('xr', 'hint links spawn bash -c "echo \'*** {hint-url}\' >> ~/org/elfeed.org"')
 config.bind('xj', 'spawn bash -c "echo {url} >> ~/.config/qutebrowser/js_blacklist.txt"')
 
+# open in firefox
+config.bind(',of', 'spawn firefox {url}')
+
 #----------
 # STYLE --
 #----------
@@ -181,7 +184,12 @@ c.fonts.web.family.standard = 'monospace'
 ## toggle
 config.bind(',vd', 'config-cycle colors.webpage.darkmode.enabled True False')
 
-## options
+## OPTIONS
+# scrolling
+c.scrolling.bar = 'always'
+c.scrolling.smooth = False
+
+# colors
 c.colors.webpage.preferred_color_scheme = 'dark'
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.algorithm = 'lightness-hsl'
@@ -201,7 +209,7 @@ c.tabs.width = '17%'
 #-------------
 # DEFAULTS --
 #-------------
-# These should be left commented.
+# These should be left commented. - Tom
 # I left them here to be able to search through this file for commands.
 
 ## Aliases for commands. The keys of the given dictionary are the
