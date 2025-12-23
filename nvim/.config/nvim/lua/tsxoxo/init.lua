@@ -2,6 +2,7 @@ require("tsxoxo/set")
 require("tsxoxo/remap")
 require("tsxoxo/lazy_init")
 require("tsxoxo/lsp-setup")
+require("tsxoxo/hex")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

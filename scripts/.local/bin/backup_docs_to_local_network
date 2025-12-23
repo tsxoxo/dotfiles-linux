@@ -23,10 +23,11 @@ fi
 # sync dirs via rsync -- saves time
 # NOTE: with --delete, backup dir will be a mirror, i.e. other files will be deleted
 # NOTE: symlinks are a pain
-rsync -avh --delete --no-links \
+rsync -avh --delete --delete-excluded no-links \
   --exclude 'node_modules/' \
   --exclude '.venv/' \
   --exclude '.git/' \
+  --exclude 'itemis_CREATE' \
   "$doc_dir_local/" \
   "$doc_dir_backup/"
 # DEBUG

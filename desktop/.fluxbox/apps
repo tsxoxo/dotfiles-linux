@@ -72,7 +72,7 @@
   [Close]	{yes}
 [end]
 [app] (class=Tint2conf)
-  [Position]	(UPPERLEFT)	{18% 11%}
+  [Position]	(UPPERLEFT)	{18% 9%}
   [Close]	{yes}
 [end]
 [app] (class=file-roller)
@@ -84,8 +84,8 @@
   [Close]	{yes}
 [end]
 [app] (name=yad) (class=Yad)
-  [Dimensions]	{45% 53%}
-  [Position]	(UPPERLEFT)	{41% 26%}
+  [Dimensions]	{45% 50%}
+  [Position]	(UPPERLEFT)	{41% 25%}
   [Close]	{yes}
 [end]
 [app] (name=featherpad) (class=FeatherPad)
@@ -148,13 +148,6 @@
 [app] (class=Conky)
   [Layer]	{12}
 [end]
-[app] (class=.*)
-  [Layer] {6}
-  [Position]	(UPPERLEFT)	{0% 0%}
-[end]
 [app] (class=Tint2)
-  [Layer]	{2}
-[end]
-[app] (class=.*) 
-  [Deco] {BORDER}
+  [Layer]	{12}
 [end]

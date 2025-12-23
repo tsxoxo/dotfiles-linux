@@ -19,9 +19,3 @@ slit.borderWidth: 0
 slit.bevelWidth: 2
 toolbar.borderWidth: 0
 
-# MY STUFF
-window.title.height: 0
-window.borderWidth: 1
-window.unfocus.borderColor: #222222
-window.focus.borderColor: #12dead
-

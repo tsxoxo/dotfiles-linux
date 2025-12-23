@@ -32,10 +32,10 @@ alias fluxconf='nvim ~/.fluxbox/'
 alias tintconf='nvim ~/.config/tint2/'
 
 # docs
-export DEV_DOCS="$HOME/docs/dev/notes"
+export DEV_DOCS="$HOME/docs/dev/"
 
 alias docs='nvim ~/docs/'
-alias uni='nvim ~/dev/hpi/'
+alias uni='nvim ~/docs/hpi/'
 alias devdocs='nvim "$DEV_DOCS"' # " inside ' == var expands on runtime
 alias ddocs='nvim "$DEV_DOCS"'
 alias dnotes='nvim "$DEV_DOCS"'
@@ -65,7 +65,6 @@ MUSIC_DOCS="$HOME/docs/music"
 alias musq='nvim $MUSIC_DOCS/recs'
 
 ## uni
-
 alias hpidocs='nvim ~/dev/hpi'
 alias hpi='nvim ~/dev/hpi'
 alias hpimath='nvim ~/dev/hpi/s1/math1/'
@@ -184,3 +183,18 @@ tout() {
 # shellcheck disable=SC2139
 alias tedit="v $tlogfile"
 alias tcat="bat $tlogfile"
+alias tat="bat $tlogfile"
+alias ttail="bat -f $tlogfile | tail -2"
+
+# CTF
+# convert hex to decimal
+alias htd=_htd $1
+alias dth=_dth $1
+
+_htd() {
+  printf "%d\n" 0x"$1"
+}
+
+_dth() {
+  printf "%x\n" "$1"
+}

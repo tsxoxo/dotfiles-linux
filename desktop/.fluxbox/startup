@@ -34,7 +34,7 @@ xdg-user-dirs-gtk-update
 #compton &
 
 #set number of seconds before inactive screen turns off
-xset -dpms && xset s 600
+#xset -dpms && xset s 600
 
 #add system monitors
 #gkrellm &
@@ -51,7 +51,7 @@ export QT_PLATFORM_PLUGIN=gtk2
 tint2session
 
 # add desktop icons
-idesktoggle idesk on 1>/dev/null 2>&1 &
+# idesktoggle idesk on 1>/dev/null 2>&1 &
 
 # add root access
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
@@ -60,7 +60,7 @@ idesktoggle idesk on 1>/dev/null 2>&1 &
 # $HOME/.fluxbox/scripts/DefaultDock.mxdk
 
 #conky to follow conky toggle settings
-conkystart
+# conkystart
 
 #place network manager on the toolbar
 nm-applet &
@@ -78,7 +78,7 @@ xfce4-clipman &
 #xfce4-power-manager &
 
 # start user accessibility bus - if not already running
-/usr/libexec/at-spi-bus-launcher --launch-immediately &
+# /usr/libexec/at-spi-bus-launcher --launch-immediately  &
 
 #update app  menu if it doesn't exist
 if [ ! -f $HOME/.fluxbox/submenus/full_menu ]; then
@@ -97,25 +97,26 @@ if [ $? -eq 0 ]; then
   fbautostart
 fi
 
-# put apt-notifier on the toolbar
-# (
-#   sleep 6
-#   /usr/bin/apt-notifier
-# ) &
-
 # start spice-vdagent in KVM/Qemu
 if [ -x /usr/bin/spice-vdagent ]; then
   pidof -q spice-vdagentd && /usr/bin/spice-vdagent
 fi
+
+# And last but not least we start fluxbox.
+# Because it is the last app you have to run it with ''exec'' before it.
+
+#screenblanking added by mx-tweak
+$HOME/.config/MX-Linux/screenblanking-mxtweak &
 
 #--------------
 # -- MY SHIT --
 #--------------
 # doing this in a subshell with sleep seems to be an idiom
 (
-  sleep 5
-  setxkbmap realprog
+  # not sure why we used to sleep here
+  # sleep 5
   while ! setxkbmap -query | grep -q "realprog"; do
+    setxkbmap realprog
     sleep 0.1
   done
   sxhkd
@@ -123,9 +124,6 @@ fi
   ~/.local/bin/last_window_d
 ) &
 #-------------
-
-# And last but not least we start fluxbox.
-# Because it is the last app you have to run it with ''exec'' before it.
 
 exec fluxbox
 # or if you want to keep a log:

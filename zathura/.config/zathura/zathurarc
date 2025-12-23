@@ -1,4 +1,4 @@
-set recolor true
+# set recolor true
 set recolor-keephue true
 # bg: dark
 set recolor-lightcolor "#5c6a72"
@@ -10,11 +10,11 @@ set recolor-darkcolor "#fdf6e3"
 set selection-clipboard clipboard
 
 # simpler scrolling
-# alternative ideas below
-map j navigate next
-map k navigate previous
-# map i feedkeys "P <S-J>"
-# snap_to_page && navigate next
+# "j/k" scroll further
+# map j navigate next
+# map k navigate previous
+map k scroll half-up
+map j scroll half-down
 
 # map <S-j> scroll down
 map <S-j> zoom in

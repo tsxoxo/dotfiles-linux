@@ -23,6 +23,7 @@ vim.keymap.set({ "n", "v" }, "<leader>fw", vim.cmd.write, { desc = "Save file." 
 vim.keymap.set({ "n", "v" }, "<leader>fq", "<cmd>qa<CR>", { desc = "Close all and quit (:qa)." })
 
 vim.keymap.set("n", "<leader>fe", vim.cmd.Oil, { desc = "Open file explorer" })
+vim.keymap.set({ "n", "v" }, "<leader>fc", "<cmd>cd %:p:h<CR>", { desc = "[c]d to dir of current buffer" })
 
 -----------------------------
 -- INTER-BUFFER NAVIGATION --
@@ -146,7 +147,16 @@ vim.keymap.set("v", "<leader>cx", ":lua<CR>", { desc = "Execute selected region 
 vim.keymap.set("n", "<leader>gt", "A --" .. esc .. "yyPVr-yyjp", { desc = "Create framed heading" })
 
 -- LANGUAGE SPECIFIC
---
+
+-- typst
+-- select inside $...$
+vim.keymap.set("x", "i$", "T$ot$")
+-- operator-pending mode: enable 'di$', 'ci$', 'yi$', etc.
+vim.keymap.set("o", "i$", ":<C-u>norm! T$vt$<cr>", { desc = "inner $...$" })
+-- would be nice to reuse existing motion 'vi$' but this doesnt work
+-- vim.keymap.set("o", "i$", ":<C-u>norm! vi$<cr>", { noremap = false, desc = "$...$" })
+vim.keymap.set("x", "a$", "F$of$")
+vim.keymap.set("o", "a$", ":<C-u>norm! F$vf$<cr>", { desc = "outer $...$" })
 
 -- man
 vim.api.nvim_create_augroup("man", { clear = true })

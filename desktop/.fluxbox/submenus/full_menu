@@ -30,10 +30,12 @@
 [exec] (Icon Browser ) { yad-icon-browser } Categories=GTK;Development;
 [end]
 [submenu] (Graphics)
+[exec] (GNU Image Manipulation Program ) { gimp-2.10  } Categories=Graphics;2DGraphics;RasterGraphics;GTK;
 [exec] (nomacs ) { nomacs  } Categories=Graphics;RasterGraphics;Viewer;2DGraphics;
 [end]
 [submenu] (Internet)
 [exec] (Advanced Network Configuration ) { nm-connection-editor } Categories=GNOME;GTK;Settings;X-GNOME-NetworkSettings;X-GNOME-Utilities;
+[exec] (Chromium Web Browser ) { /usr/bin/chromium  } Categories=Network;WebBrowser;
 [exec] (Firefox ) { firefox  } Categories=Network;WebBrowser;
 [exec] (MX Network Assistant ) { mx-network-assistant } Categories=System;MX-Tools;
 [exec] (MX Viewer ) { mx-viewer  } Categories=Qt;Network;Utilities;
@@ -42,6 +44,7 @@
 [end]
 [submenu] (Multimedia)
 [exec] (Alsamixer ) { x-terminal-emulator -e alsamixer } Categories=AudioVideo;Player;Audio;
+[exec] (Cheese ) { cheese } Categories=GNOME;AudioVideo;Video;Recorder;
 [exec] (DeaDBeeF ) { deadbeef  } Categories=Audio;AudioVideo;Player;GTK;
 [exec] (guvcview webcam ) { guvcview } Categories=Video;AudioVideo;
 [exec] (mpv Media Player ) { mpv --player-operation-mode=pseudo-gui --  } Categories=AudioVideo;Audio;Video;Player;TV;
@@ -63,6 +66,7 @@
 [exec] (MX Cleanup ) { mx-cleanup } Categories=System;MX-Tools
 [exec] (MX Conky ) { mx-conky } Categories=GNOME;GTK;System;MX-Tools
 [exec] (MX Date & Time ) { mx-datetime } Categories=GNOME;GTK;System;MX-Tools;
+[exec] (MX Dockmaker ) { mx-dockmaker } Categories=System;MX-Tools;
 [exec] (MX Fix GPG keys ) { x-terminal-emulator -e pkexec checkaptgpg --wait-at-end } Categories=PackageManager;System;MX-Tools;
 [exec] (MX Live USB Maker ) { mx-live-usb-maker } Categories=System;MX-Tools;
 [exec] (MX Locale ) { mx-locale } Categories=System;MX-Tools;X-antiX;
@@ -141,6 +145,7 @@
 [exec] (MX Comfort ) { mxfb-comfort } Categories=System;X-MXFB-Tools;
 [exec] (MX Conky ) { mx-conky } Categories=GNOME;GTK;System;MX-Tools
 [exec] (MX Date & Time ) { mx-datetime } Categories=GNOME;GTK;System;MX-Tools;
+[exec] (MX Dockmaker ) { mx-dockmaker } Categories=System;MX-Tools;
 [exec] (MX Fix GPG keys ) { x-terminal-emulator -e pkexec checkaptgpg --wait-at-end } Categories=PackageManager;System;MX-Tools;
 [exec] (MX Fluxbox Tweaks ) { mx-tweak } Categories=System;X-MXFB-Tools;
 [exec] (MX Idesktool ) { mx-idesktool } Categories=System;X-MXFB-Tools;

@@ -22,5 +22,6 @@ edit_in_doc = [
 prepend_rules = [
 	{ name = "*.pdf", use = [ "open", "firefox" ] },
 	{ name = "*.html", use = [ "qutebrowser", "firefox" ] },
-	{ mime = "text/*", use = "edit_in_doc" },
+    # does not work on filter-views
+	# { mime = "text/*", use = "edit_in_doc" },
 ]

@@ -39,8 +39,8 @@ desc = "Go ~/docs"
 
 [[mgr.prepend_keymap]]
 on = [ "g", "u" ]
-run = 'cd ~/dev/hpi/s1/'
-desc = "Go uni"
+run = 'cd ~/docs/hpi/s1/'
+desc = "Go hpi"
 
 [[mgr.prepend_keymap]]
 on = [ "g", "n" ]
