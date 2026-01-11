@@ -1,0 +1,52 @@
+#!/usr/bin/env sh
+# User directories
+xdg-user-dirs-update
+
+# Screen timeout
+xset -dpms && xset s 600
+
+# Qt theme (needed if you use Qt apps)
+export QT_QPA_PLATFORMTHEME=gtk2
+
+# Accessibility bus (some GTK apps break without it)
+/usr/libexec/at-spi-bus-launcher --launch-immediately &
+
+# Authentication agent (essential for GUI sudo prompts)
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# Audio (your main concern)
+pipewire-start
+
+# Network manager tray (probably want this)
+# nm-applet &
+
+# Wallpaper
+# nitrogen --restore
+
+# Hide mouse
+unclutter --timeout 3 --ignore-scrolling --start-hidden --fork
+
+# keep screen alive during fullscreen movies
+caffeine &
+
+# --- Keys ---
+# NOTE: 2025-01-11
+# Goal: redox gets us, all else get realprog
+# I have been fighting with this for 4 hours via /etc/default/keyboard and /etc/X11/xorg.conf.d-scripts.
+# I am doing this here now as per gemini's advive. at least this did survive a log out.
+#
+# Set layout before running sxhkd
+# because gemini says it captures keycoded based on
+# layout active when it starts
+# 1. Ensure the global default is US (for Redox and others)
+setxkbmap us
+
+# 2. Target the Apple Keyboard specifically by its name
+# We use xinput to find the ID dynamically in case it changes
+APPLE_ID=$(xinput list --id-only "Apple Inc. Apple Internal Keyboard / Trackpad")
+
+if [ -n "$APPLE_ID" ]; then
+  setxkbmap -device "$APPLE_ID" realprog
+fi
+
+pgrep -x sxhkd >/dev/null || sxhkd &

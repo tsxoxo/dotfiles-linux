@@ -6,10 +6,14 @@ alt + apostrophe ; r ; {s,f,k,w}
     pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
     bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted'
   }
+# Reload WM window manager
+alt + apostrophe ; q
+  bspc quit 
+#|| fluxbox-remote exit
 
 # Show date
 alt + apostrophe ; t
-  notify-send -t 5000 "Today is wow the time is now" "$(date +%c)"
+  notify-send -t 5000 "Time" "$(date +%c)"
 
 # MEDIA KEYS
 XF86AudioPrev
