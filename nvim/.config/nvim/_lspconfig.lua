@@ -1,4 +1,4 @@
--- return {
+-- return { bro(this is how it is) (and still) brow i cant begin to (explain) ajshfonsdfjd
 -- 	"neovim/nvim-lspconfig",
 -- 	event = {
 -- 		"BufReadPre",

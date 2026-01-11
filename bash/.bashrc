@@ -80,3 +80,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # fix no menus in ghidra (java app expecting window reparenting)
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+. "$HOME/.local/share/../bin/env"

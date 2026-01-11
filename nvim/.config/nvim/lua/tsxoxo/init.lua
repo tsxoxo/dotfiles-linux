@@ -113,13 +113,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 	end,
 -- })
 
--- vim.api.nvim_create_autocmd("BufWritePost", {
--- 	pattern = vim.fn.stdpath("config") .. "/lua/tsxoxo/lazy/*.lua",
--- 	callback = function()
--- 		vim.cmd("silent! Lazy sync")
--- 	end,
--- })
-
 -- DEBUG
 -- Parts of my config like keybinds and certain behaviors
 -- get unloaded after a while after starting nvim.
@@ -131,6 +124,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- })
 --
 
+---------------------------------------------------
+--- Set CWD based on arg when opening via `v <arg>`
+---------------------------------------------------
 local exclude_ft = {
 	man = true,
 	help = true,

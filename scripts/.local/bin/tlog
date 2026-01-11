@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# tlog
+#
+
+DOCS_DIR=$(xdg-user-dir DOCUMENTS)
+TIME_LOG="$DOCS_DIR"/time.log
+
+if [[ ! -f "$TIME_LOG" ]]; then
+  echo "Error: Time log not found at $TIME_LOG"
+  exit 100
+fi
+
+first_time=
+last_time=
+
+# filter by project
+while IFS="|" read timestamp startstop proj desc tags; do
+  # START_HERE:
+  # - write program structure via comments
+  # - for session duration we need next line, so probably read into array
+  # - probably write functions "get_date_diff_minutes timestamp_a timestamp_b" and "get_date_diff_days"
+  if [[ "$proj" = *"$1"* ]]; then
+    if [[ -z $first_time ]]; then
+      first_time="$timestamp"
+    fi
+    last_time="$timestamp"
+  fi
+done <"$TIME_LOG"
+
+FIRST_TIME_EPOCH=$(date -d "$first_time" +%s)
+LAST_TIME_EPOCH=$(date -d "$last_time" +%s)
+
+DIFF_DAYS=$(((LAST_TIME_EPOCH - FIRST_TIME_EPOCH) / (60 * 60 * 24)))
+
+echo "diff_days: $DIFF_DAYS"
+
+exit 0

@@ -151,6 +151,7 @@ config.bind('xj', 'spawn bash -c "echo {url} >> ~/.config/qutebrowser/js_blackli
 
 # open in firefox
 config.bind(',of', 'spawn firefox {url}')
+config.bind(',oc', 'spawn chromium {url}')
 
 #----------
 # STYLE --

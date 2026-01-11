@@ -1,0 +1,10 @@
+# KEYBOARD CONFIGURATION FILE
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="macbook78"
+XKBLAYOUT="realprog"
+XKBVARIANT=""
+XKBOPTIONS="grp:rctrl_rshift_toggle,terminate:ctrl_alt_bksp"
+
+BACKSPACE="guess"

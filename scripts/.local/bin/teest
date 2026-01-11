@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# tlog
+#
+
+DOCS_DIR=$(xdg-user-dir DOCUMENTS)
+TIME_LOG="$DOCS_DIR"/time.log
+
+if [[ ! -f "$TIME_LOG" ]]; then
+  echo "Error: Time log not found at $TIME_LOG"
+  exit 100
+fi
+
+first_time=
+last_time=
+
+while IFS="|" read timestamp startstop proj desc tags; do
+  # echo "timestamp: $timestamp"
+  # echo "startstop: $startstop"
+  # echo "proj: $proj"
+  # echo "desc: $desc"
+  # echo "tags: $tags"
+  # echo
+
+  if [[ "$tags" = *"$1"* ]]; then
+    if [[ -z $first_time ]]; then
+      first_time="$timestamp"
+    fi
+    last_time="$timestamp"
+  fi
+done <"$TIME_LOG"
+
+FIRST_TIME_EPOCH=$(date -d "$first_time" +%s)
+LAST_TIME_EPOCH=$(date -d "$last_time" +%s)
+
+DIFF_DAYS=$(((LAST_TIME_EPOCH - FIRST_TIME_EPOCH) / (60 * 60 * 24)))
+
+echo "diff_days: $DIFF_DAYS"
+
+exit 0

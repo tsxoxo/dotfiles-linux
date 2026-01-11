@@ -1,5 +1,5 @@
 # Reload (after modifying config)
-alt + dollar ; r ; {s,f,k,w}
+alt + apostrophe ; r ; {s,f,k,w}
   { \
     pkill -USR1 -x sxhkd; notify-send -t 1500 'sxhkd' 'Reloaded config', \
     fluxbox-remote reconfigure; notify-send -t 1500 'fluxbox' 'Reloaded config', \
@@ -8,7 +8,7 @@ alt + dollar ; r ; {s,f,k,w}
   }
 
 # Show date
-alt + dollar ; t
+alt + apostrophe ; t
   notify-send -t 5000 "Today is wow the time is now" "$(date +%c)"
 
 # MEDIA KEYS
@@ -29,7 +29,7 @@ XF86AudioMute
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Screenshots
-alt + dollar ; s ; {f,p}
+alt + apostrophe ; s ; {f,p}
     { \
     scrot $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took full screenshot', \
     scrot -s $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took partial screenshot', \
@@ -61,11 +61,11 @@ alt + w ; {t,f,l}
 	bspc node -t {tiled,fullscreen,floating}
 
 # alternate between the tiled and monocle layout
-alt + w ; dollar
+alt + w ; n
     bspc desktop -l next
 
 # alternate between vertical and horizontal split
-alt + w ; bar
+alt + w ; semicolon
     bspc node @parent -R 90
 
 #---------------
@@ -73,23 +73,29 @@ alt + w ; bar
 #---------------
 
 # Switch between apps
-# h = terminal
-# u, j, m = media = firefox, qutebrowser, video player
-# i, k, , = docs = image viewer, pdf
-# p, ;, ' = etc = password
-alt + w ; { h, u, j, m, i, k}
+# top apps on homerow
+alt + { j, k, l, semicolon}
   wmctrl -xa \ 
   { \
     kitty || kitty , \
-    firefox || firefox, \
     qutebrowser || qutebrowser, \
-    mpv || mpv, \
-    nomacs || nomacs, \
     zathura || zathura, \
+    1password || 1password
   }
+# less used stuff behind mode switch 
+# browsers
+alt + w; { k, l }
+  wmctrl -xa \ 
+  { \
+    firefox || firefox, \
+    chromium || chromium , \
+  }
+# do i even need more
+# mpv || mpv, \
+# nomacs || nomacs, \
 
 # focus desktop
-alt + {j,k,l}
+alt + {a,s,d}
   bspc desktop -f '^{1,2,3}'
 
 # focus last node
@@ -114,7 +120,7 @@ alt + w ; {comma, period}
 #------------------
 
 # send to desktop and follow
-alt + w; {plus, bracketleft, braceleft}
+alt + w; {a,s,d}
 	bspc node -d '^{1,2,3}' --follow
 
 # expand a window by moving one of its side outward

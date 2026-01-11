@@ -35,9 +35,11 @@ alias tintconf='nvim ~/.config/tint2/'
 export DEV_DOCS="$HOME/docs/dev/"
 
 alias docs='nvim ~/docs/'
-alias uni='nvim ~/docs/hpi/'
+alias doc='nvim ~/docs/'
+
 alias devdocs='nvim "$DEV_DOCS"' # " inside ' == var expands on runtime
 alias ddocs='nvim "$DEV_DOCS"'
+alias ddoc='nvim "$DEV_DOCS"'
 alias dnotes='nvim "$DEV_DOCS"'
 alias devnotes='nvim "$DEV_DOCS"'
 
@@ -60,14 +62,18 @@ nvim_cd_todo() {
   nvim -c "cd ${FILE%/*}" "$FILE"
 }
 
+## journal
+alias jour='nvim ~/docs/journal/'
+alias journal='nvim ~/docs/journal/'
+
 ## music
 MUSIC_DOCS="$HOME/docs/music"
 alias musq='nvim $MUSIC_DOCS/recs'
 
 ## uni
-alias hpidocs='nvim ~/dev/hpi'
-alias hpi='nvim ~/dev/hpi'
-alias hpimath='nvim ~/dev/hpi/s1/math1/'
+alias uni='nvim ~/docs/hpi/'
+alias hpi='nvim ~/docs/hpi'
+alias hpimath='nvim ~/docs/hpi/s1/math1/'
 
 # abbreviations
 alias v=nvim
