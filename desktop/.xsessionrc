@@ -1,33 +1,36 @@
 #!/usr/bin/env sh
+
+### ---Environment variables---
+# PATH
+# this is already in ~/.profile but that does not fire for new panes in tmux
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+# ---XDG---
+### (these might be the defaults but I like them explicit.)
+### also see /home/tom/.config/user-dirs.dirs
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+### All is vim
+export MANPAGER='nvim +Man!'
+export VISUAL=nvim
+export EDITOR=nvim
+
+# ---OTHER APPS---
+# Qt theme (needed if you use Qt apps)
+export QT_QPA_PLATFORMTHEME=gtk2
+# fix no menus in ghidra (java app expecting window reparenting)
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # User directories
 xdg-user-dirs-update
 
 # Screen timeout
 xset -dpms && xset s 600
-
-# Qt theme (needed if you use Qt apps)
-export QT_QPA_PLATFORMTHEME=gtk2
-
-# Accessibility bus (some GTK apps break without it)
-/usr/libexec/at-spi-bus-launcher --launch-immediately &
-
-# Authentication agent (essential for GUI sudo prompts)
-/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-
-# Audio (your main concern)
-pipewire-start
-
-# Network manager tray (probably want this)
-# nm-applet &
-
-# Wallpaper
-# nitrogen --restore
-
-# Hide mouse
-unclutter --timeout 3 --ignore-scrolling --start-hidden --fork
-
-# keep screen alive during fullscreen movies
-caffeine &
 
 # --- Keys ---
 # NOTE: 2025-01-11
@@ -49,4 +52,13 @@ if [ -n "$APPLE_ID" ]; then
   setxkbmap -device "$APPLE_ID" realprog
 fi
 
-pgrep -x sxhkd >/dev/null || bash -c "export PATH=$HOME/.local/bin:$PATH; sxhkd" & # add our custom scripts
+# ---BUSSES---
+# Accessibility bus (some GTK apps break without it)
+/usr/libexec/at-spi-bus-launcher --launch-immediately &
+
+# Authentication agent (essential for GUI sudo prompts)
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# Audio (your main concern)
+# run this in background?
+pipewire-start &

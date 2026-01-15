@@ -24,6 +24,25 @@ shopt -s cmdhist
 ### by saving/refreshing it after every command
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+### Environment variables
+# this is already in ~/.profile but that does not fire for new panes in tmux
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+# XDG
+### (these might be the defaults but I like them explicit.)
+### also see /home/tom/.config/user-dirs.dirs
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+### All is vim
+export MANPAGER='nvim +Man!'
+export VISUAL=nvim
+export EDITOR=nvim
+
 # Load aliases
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
@@ -58,6 +77,9 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg/rgrc"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# fix no menus in ghidra (java app expecting window reparenting)
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # what is this?
 . "$HOME/.local/share/../bin/env"

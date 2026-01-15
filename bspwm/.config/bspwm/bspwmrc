@@ -1,5 +1,18 @@
 #! /bin/sh
 
+# Kill existing processes to prevent duplicates on restart
+killall -q sxhkd dunst unclutter caffeine
+
+# Start background services
+sxhkd &
+dunst &
+unclutter --timeout 3 --ignore-scrolling --start-hidden --fork
+caffeine &
+
+# Tell D-Bus about your environment (Crucial for Dunst/Notify-send)
+dbus-update-activation-environment --all &
+
+# --- bspwm stuff ---
 bspc monitor -d I II III IV
 
 bspc config border_width 2
