@@ -145,6 +145,8 @@ config.bind(',xo', 'jseval (function () { '+
 
 # taken from (1). they look interesting
 config.bind(';m', 'hint links spawn mpv {hint-url}')
+config.bind(';f', 'hint links spawn firefox {hint-url}')
+config.bind(';c', 'hint links spawn chromium {hint-url}')
 # config.bind('xy', 'hint links spawn yt-dlp {hint-url} -o "~/videos/youtube/%(title)s.%(ext)s"')
 # config.bind('xr', 'hint links spawn bash -c "echo \'*** {hint-url}\' >> ~/org/elfeed.org"')
 config.bind('xj', 'spawn bash -c "echo {url} >> ~/.config/qutebrowser/js_blacklist.txt"')

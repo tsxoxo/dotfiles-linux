@@ -52,3 +52,9 @@ on   = [ "g", "g" ]
 # run  = 'search --via=fd --args="-t f --search-path ~/docs --search-path ~/dev"'
 run  = 'search --via=fd --args="--search-path /home/tom/docs --search-path /home/tom/dev"'
 desc = "Search frequent files"
+
+# open dragon with selected files
+[[mgr.prepend_keymap]]
+on  = "<C-n>"
+# run = "shell --orphan -- dragon -x -i -T %h 2>/dev/null"
+run = 'shell -- sh -c "dragon -x -i -T %h >/dev/null 2>&1 &"'

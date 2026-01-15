@@ -1,0 +1,10 @@
+# 1. Kill any existing sxhkd processes first: pkill -9 sxhkd
+# 2. Restart it manually in a terminal to see the error output: sxhkd -c path/to/this/file
+
+# SIMPLE TEST
+alt + t
+    notify-send 'Test' 'Sxhkd is working'
+
+# Reload sxhkd
+alt + Escape
+    pkill -USR1 -x sxhkd && notify-send 'sxhkd' 'Reloaded'

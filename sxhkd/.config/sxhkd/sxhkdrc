@@ -1,19 +1,17 @@
 # Reload (after modifying config)
-alt + apostrophe ; r ; {s,f,k,w}
+alt + r ; {s,f,k,b}
   { \
     pkill -USR1 -x sxhkd; notify-send -t 1500 'sxhkd' 'Reloaded config', \
     fluxbox-remote reconfigure; notify-send -t 1500 'fluxbox' 'Reloaded config', \
     pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
-    bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted'
+    bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted' \
   }
 # Reload WM window manager
-alt + apostrophe ; q
-  bspc quit 
-#|| fluxbox-remote exit
-
-# Show date
-alt + apostrophe ; t
-  notify-send -t 5000 "Time" "$(date +%c)"
+alt + q ; {b,f}
+  { \
+    bspc quit, \
+    fluxbox-remote exit \
+  }
 
 # MEDIA KEYS
 XF86AudioPrev
@@ -32,13 +30,18 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 
+
+# ETC
+# Show date
+alt + t ; t
+  notify-send -t 5000 "Time" "$(date +%c)"
 # Screenshots
-alt + apostrophe ; s ; {f,p}
+alt + t ; {f,p,d}
     { \
     scrot $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took full screenshot', \
     scrot -s $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took partial screenshot', \
+    PATH="$HOME/.local/bin:$PATH" drag_scrots \
     }
-
 
 #############################################################
 # bspwm hotkeys
@@ -126,6 +129,10 @@ alt + w ; {comma, period}
 # send to desktop and follow
 alt + w; {a,s,d}
 	bspc node -d '^{1,2,3}' --follow
+
+# move window
+alt + w ; m ; Left
+  bspc node --move -50 0; notify-send -t 1000 "it works" "foo"
 
 # expand a window by moving one of its side outward
 alt + w ; shift + {Left,Down,Up,Right}

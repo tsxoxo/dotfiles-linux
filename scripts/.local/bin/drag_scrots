@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# drag_scrots
+# Opens floating window with dragable screenshots
+
+# set scrot dir and exit if not found
+SCROTS_DIR=$(xdg-user-dir SCROTS)
+[[ -d "$SCROTS_DIR" ]] || exit 1
+
+NUM_TO_SHOW=5
+THUMB_SIZE=128
+
+# show newest n
+files=$(find "$SCROTS_DIR" -name '*.png' -printf "%T@ %p\n" |
+  sort -nr |
+  head -"$NUM_TO_SHOW" |
+  cut --delimiter=' ' -f 2)
+# exit if none are found
+[[ -n "$SCROTS_DIR" ]] || exit 2
+
+# pipe to dragon. newline is necessary
+printf '%s\n' "$files" | dragon --stdin --icon-only --thumb-size "$THUMB_SIZE"
+
+# alt version: don't store files, simpler but no empty check
+# find "$SCROTS_DIR" -name '*.png' -printf "%T@ %p\n" | # print <timestamp filename>
+#   sort -nr |                                          # sort according to timestamps
+#   head -"$NUM_TO_SHOW" |
+#   cut --delimiter=' ' -f 2 | # cut timestamps
+#   dragon --stdin --icon-only --thumb-size "$THUMB_SIZE"
+
+exit 0

@@ -49,4 +49,4 @@ if [ -n "$APPLE_ID" ]; then
   setxkbmap -device "$APPLE_ID" realprog
 fi
 
-pgrep -x sxhkd >/dev/null || sxhkd &
+pgrep -x sxhkd >/dev/null || bash -c "export PATH=$HOME/.local/bin:$PATH; sxhkd" & # add our custom scripts
