@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+udisksctl mount -b /dev/disk/by-id/usb-Samsung_Portable_SSD_T5_123456860CBE-0:0-part1
+

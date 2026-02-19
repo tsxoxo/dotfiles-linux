@@ -48,6 +48,11 @@ run = 'cd ~/docs/dev/notes/'
 desc = "Go devnotes"
 
 [[mgr.prepend_keymap]]
+on = [ "g", "t" ]
+run = 'cd ~/pics/scrots/'
+desc = "Go scrots"
+
+[[mgr.prepend_keymap]]
 on   = [ "g", "g" ]
 # run  = 'search --via=fd --args="-t f --search-path ~/docs --search-path ~/dev"'
 run  = 'search --via=fd --args="--search-path /home/tom/docs --search-path /home/tom/dev"'
@@ -56,4 +61,4 @@ desc = "Search frequent files"
 # open dragon with selected files
 [[mgr.prepend_keymap]]
 on  = "-"
-run = "shell -- dragon -x -i -T $@"
+run = "shell -- dragon -i -T \"$@\""

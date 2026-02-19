@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+current=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | tr -d '%')
+
+dunstify -h string:x-canonical-private-synchronous:audio "Volume: " -h int:value:"$current"
+
+# START_HERE:
+# https://github.com/dunst-project/dunst/blob/master/contrib/progress-notify.sh
+# and 'dunst' convo with gemini

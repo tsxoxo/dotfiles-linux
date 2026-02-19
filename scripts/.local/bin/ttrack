@@ -1,0 +1,182 @@
+# ttrack
+# (t)ime (track)er
+#
+# SYNOPSIS
+# ttrack <command>
+#
+# AVAILABLE COMMANDS:
+# week <project> -- show total average time per week for the project
+
+# GLOBALS
+DOCS_DIR=$(xdg-user-dir DOCUMENTS)
+DB="$DOCS_DIR"/time.log
+DB_IFS="|"
+# TEST DBs for lint-runs
+# DB="$HOME/docs/time.log.test.consecutive-starts"
+# DB="$HOME/docs/time.log.test.odd-num-lines"
+DB="$HOME/docs/time.log.test.short"
+# Owned by make_sessions(). Otherwise read-only
+SESSIONS=()
+QUERY_PROJECT=
+QUERY_VIEW=
+
+# DB ENTRY STRUCTURE
+# 1-based indexing for awk
+IDX_TIMESTAMP=1
+IDX_EVENT=2
+SESSION_START_MARKER="START"
+SESSION_STOP_MARKER="STOP"
+
+if [[ ! -f "$DB" ]]; then
+  echo "Error: Time log not found at $DB"
+  exit 100
+fi
+
+# parse time db into canonical session records
+make_sessions() { # OWNS: $SESSIONS
+  # IN: text file containing time entries
+  # OUT: set of canonical records: (project, start, stop, description, tags)
+  # lets keep it simple for now: handful of passes, each does one thing
+  # pass 1: store raw session entries in array
+  SESSION_ENTRIES_RAW=
+  mapfile -t SESSION_ENTRIES_RAW <"$DB"
+  # NOTE: idea: use mapfile -c 2 -C splice_stop_into_start
+
+  # pass 2: lint
+  # check invariant:
+  # odd line: event == START
+  # even line: event == STOP
+  # NOTE: possibly, make this a module to run on each entry-input (tin command);
+  for i in "${!SESSION_ENTRIES_RAW[@]}"; do
+    EVENT=$(echo "${SESSION_ENTRIES_RAW[i]}" | awk -F "$DB_IFS" "{print \$$IDX_EVENT}")
+    EXPECTED_EVENT=
+    # NOTE: i starts at 0
+    if test "$((i % 2))" = 0; then
+      EXPECTED_EVENT="$SESSION_START_MARKER"
+    else
+      EXPECTED_EVENT="$SESSION_STOP_MARKER"
+    fi
+    if [[ "$EVENT" != "$EXPECTED_EVENT" ]]; then
+      # i+1: make output human-readable -- first line is 'line 1'
+      echo "ERROR during lint pass on line $((i + 1))"
+      echo "Expected 'EVENT' field to be $EXPECTED_EVENT"
+      echo "Got $EVENT instead"
+      echo "Affected entry: ${SESSION_ENTRIES_RAW[$i]}"
+      exit 1
+    fi
+
+    # NOTE: this seems redundant
+    # lint continued
+    # check invariant:
+    # odd number of lines in file: last event == START
+    # even number of lines in file: last event == STOP
+    # LAST_EVENT=$(echo "${SESSION_ENTRIES_RAW[-1]}" | awk -F "$DB_IFS" "{print \$$IDX_EVENT}")
+    # EXPECTED_LAST_EVENT=
+    # NUM_LINES="${#SESSION_ENTRIES_RAW[@]}"
+    # if test "$((NUM_LINES % 2))" = 1; then
+    #   EXPECTED_LAST_EVENT="$SESSION_START_MARKER"
+    # else
+    #   EXPECTED_LAST_EVENT="$SESSION_STOP_MARKER"
+    # fi
+    # if [[ "$LAST_EVENT" != "$EXPECTED_LAST_EVENT" ]]; then
+    #   # i+1: make output human-readable -- first line is 'line 1'
+    #   echo "Lint pass error:  line $(NUM_LINES) (last line)"
+    #   echo "Counted number of lines: $NUM_LINES"
+    #   echo "Expected 'EVENT' field of last line to be $EXPECTED_LAST_EVENT"
+    #   echo "Got $EVENT instead"
+    #   echo "Affected entry: ${SESSION_ENTRIES_RAW[-1]}"
+    #   exit 1
+    # fi
+
+    # --- BUILD SESSION RECORD ---
+    # do this only on "odd" numbered lines
+    # NOTE: first line has index 0
+    if test "$((i % 2))" = 0; then
+      STOP_TIMESTAMP=$(echo "${SESSION_ENTRIES_RAW[i + 1]}" | awk -F "$DB_IFS" -v idx="$IDX_TIMESTAMP" '{print $(idx)}')
+      # splice in stop timestamp after start timestamp
+      # START_HERE: can we split this to one flag per line?
+      # - also: change above awk commands to use -v flag
+      RECORD=$(echo "${SESSION_ENTRIES_RAW[i]}" | awk -F "$DB_IFS" -v OFS="$DB_IFS" -v idx="$IDX_TIMESTAMP" -v stop="$STOP_TIMESTAMP" '{ $(idx) = $(idx) FS stop; print }')
+      SESSIONS+=("$RECORD")
+    fi
+  done
+
+  # lint continued
+  # i am not a fan of splitting linting like this but we only want to check this once
+  # check invariant:
+  # we have even number of lines
+  # if not, output warning
+  NUM_LINES="${#SESSION_ENTRIES_RAW[@]}"
+  if test "$((NUM_LINES % 2))" = 1; then
+    echo "WARNING: expected even number of lines, got $NUM_LINES"
+    echo "Ignoring last entry: ${SESSION_ENTRIES_RAW[-1]}"
+  fi
+
+  # --- TEST OUTPUT ---
+  printf '%s\n' "${SESSIONS[@]}"
+}
+
+# assign a week to a session
+assign_week() {
+  # IN: either session record or a (start) timestamp
+  # OUT: either the week or an amended record
+  return 0
+}
+
+# compute duration of a session
+compute_duration() {
+  # IN: either session record or start and stop timestamps
+  # OUT: either a duration in hours or an amended record
+  return 0
+}
+
+# aggregate
+# NOTE: first draft. we'll probably shorten/simplify/abstract this function
+make_view__by_project__total_time_by_week() {
+  # IN: a set of records
+  # OUT: a view: (project, avg_hours_week, total_hours, num_weeks, from_date, to_date)
+
+  sessions=$1
+  project=$2
+  avg_hours_week=
+  total_hours=
+  num_weeks=
+  from_date=
+  to_date=
+
+  # Create intermediate structure: set of ((...sess), week, duration)
+  # for sess in sessions:
+  # sess.week=assign_week sess.start
+  # sess.duration=compute_duration sess.start sess.stop
+  # total_hours+=sess.duration
+
+  # QUESTION: should we sort by timestamp and make grouping by week easier?
+  # in any case, we want to get an intermediate structure: set of (week, hours)
+
+  # compute average hours per week
+  # use set of (week, hours)
+  # we also get num_weeks in either of the previous two steps
+
+  # and somewhere we get from_date and to_date
+
+  return view
+}
+
+# print avg hours per week of project
+# print_view_week_avg
+# IN: a view: (project, avg_hours_week, total_hours, num_weeks, from_date, to_date)
+
+# Parse command line arguments and call appropiate function
+parse_args() {
+  if [[ $1 == 'week' ]]; then
+    query_project=$2
+    view=
+    make_sessions
+    view_week_avg=make_view__by_project__total_time_by_week sessions query_project
+    print_view_week_avg view_week_avg
+  fi
+  return 0
+}
+
+# parse_args $1 $2
+make_sessions

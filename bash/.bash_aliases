@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # configs
+export DOTFILES="$HOME/dotfiles"
+
 alias conf='nvim ~/dotfiles/'
 alias dotconf='nvim ~/dotfiles/'
 alias dots='nvim ~/dotfiles/'
@@ -20,10 +22,10 @@ alias qbconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias quteconf='nvim ~/dotfiles/qutebrowser/.config/qutebrowser/config.py'
 alias yazconf='nvim ~/.config/yazi/'
 alias yazkeys='nvim ~/.config/yazi/keymap.toml'
+alias autoconf='nvim "$HOME/.xsessionrc" "$HOME/.bashrc" "$HOME/.profile" "$DOTFILES/bspwm/.config/bspwm/bspwmrc"'
+alias startconf='nvim "$HOME/.xsessionrc" "$HOME/.bashrc" "$HOME/.profile" "$DOTFILES/bspwm/.config/bspwm/bspwmrc"'
 
 edit_dotfiles() {
-  DOTFILES="$HOME/dotfiles"
-
   nvim -c "cd $DOTFILES" "$DOTFILES$1"
 }
 

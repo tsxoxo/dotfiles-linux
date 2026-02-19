@@ -194,6 +194,7 @@
 [exec] (Bluetooth Manager ) { blueman-manager } Categories=GTK;GNOME;Settings;HardwareSettings;
 [exec] (Brightness Systray ) { mx-tweak --tray & } Categories=XFCE;Settings;DesktopSettings;MX-Tools;
 [exec] (Firewall Configuration ) { gufw } Categories=GNOME;GTK;Settings;Security;X-GNOME-Settings-Panel;X-GNOME-SystemSettings;X-Unity-Settings-Panel;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+[exec] (IBus Preferences ) { ibus-setup } Categories=Settings;
 [exec] (LightDM GTK+ Greeter settings ) { lightdm-gtk-greeter-settings-pkexec } Categories=GNOME;GTK;Settings;System;Utility;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 [exec] (MX Tools ) { mx-tools } Categories=XFCE;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;
 [exec] (MX Tweak ) { mx-tweak } Categories=XFCE;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;MX-Tools;

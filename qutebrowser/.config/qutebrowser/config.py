@@ -129,7 +129,9 @@ config.bind(',cj', 'tab-only --prev')
 
 # Leave passthrough mode
 # By default, passthrough mode interprets shift+caps as backshift
-config.bind('<Ctrl-z>', 'mode-leave', mode='passthrough')
+# config.bind('<Ctrl-q>', 'mode-leave', mode='passthrough')
+config.bind('..', 'mode-enter passthrough')
+config.bind('<Ctrl-.>', 'mode-leave', mode='passthrough')
 
 ### Kill overlays
 config.bind(',xo', 'jseval (function () { '+
@@ -194,7 +196,7 @@ c.scrolling.smooth = False
 
 # colors
 c.colors.webpage.preferred_color_scheme = 'dark'
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.algorithm = 'lightness-hsl'
 c.colors.webpage.darkmode.contrast = -.022
 c.colors.webpage.darkmode.threshold.foreground = 150

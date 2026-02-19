@@ -33,6 +33,23 @@ xdg-user-dirs-update
 xset -dpms && xset s 600
 
 # --- Keys ---
+# NOTE: 2025-01-25
+# the below doesnt work. theories: this gets overwritten later in the startup process or this fires before xinput list recognizes apple
+# the code works when run in the terminal
+# right now i am going back to using a /etc/X11/xorg.conf.d script to do this
+# if that doesnt work, try putting the following in bspwmrc before sxhkd starts up.
+# 2. Wait for the Apple keyboard to appear and then map it
+# (
+#     # Try to find the keyboard for up to 10 seconds
+#     for i in {1..20}; do
+#         APPLE_ID=$(xinput list --id-only "Apple Inc. Apple Internal Keyboard / Trackpad" 2>/dev/null)
+#         if [ -n "$APPLE_ID" ]; then
+#             setxkbmap -device "$APPLE_ID" realprog
+#             break
+#         fi
+#         sleep 0.5
+#     done
+# ) &
 # NOTE: 2025-01-11
 # Goal: redox gets us, all else get realprog
 # I have been fighting with this for 4 hours via /etc/default/keyboard and /etc/X11/xorg.conf.d-scripts.
@@ -42,15 +59,20 @@ xset -dpms && xset s 600
 # because gemini says it captures keycoded based on
 # layout active when it starts
 # 1. Ensure the global default is US (for Redox and others)
-setxkbmap us
+# setxkbmap us
 
 # 2. Target the Apple Keyboard specifically by its name
 # We use xinput to find the ID dynamically in case it changes
-APPLE_ID=$(xinput list --id-only "Apple Inc. Apple Internal Keyboard / Trackpad")
+# APPLE_ID=$(xinput list --id-only "Apple Inc. Apple Internal Keyboard / Trackpad")
+#
+# if [ -n "$APPLE_ID" ]; then
+#   setxkbmap -device "$APPLE_ID" realprog
+# fi
 
-if [ -n "$APPLE_ID" ]; then
-  setxkbmap -device "$APPLE_ID" realprog
-fi
+# --- END FAULTY KEYS SECTION ---
+
+# need this for unicode input for german umlauts
+ibus-daemon -rxRd
 
 # ---BUSSES---
 # Accessibility bus (some GTK apps break without it)

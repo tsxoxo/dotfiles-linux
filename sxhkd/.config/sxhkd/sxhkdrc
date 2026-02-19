@@ -89,12 +89,16 @@ alt + { j, k, l, semicolon}
     zathura || zathura, \
     1password || 1password
   }
-# less used stuff behind mode switch 
-# browsers
-alt + w; { k, l }
+# row above is for tmux windows
+alt + { m }
   wmctrl -xa \ 
   { \
     firefox || firefox, \
+  }
+# less used stuff behind mode switch 
+alt + w; { m }
+  wmctrl -xa \ 
+  { \
     chromium || chromium , \
   }
 # do i even need more
