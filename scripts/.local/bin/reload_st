@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# "reload" st after making a change to config.h
+
+# set scrot dir and exit if not found
+ST_DIR="$HOME/.local/src/st-0.9.3"
+cd "$ST_DIR" || {
+  echo "Directory not found"
+  exit 1
+}
+make &&
+  {
+    # NOTE: STATUS: abandoned
+    # when i started writing this i thought this would be a good idea.
+    # forced termination could lead to problems and unwanted loss of state.
+    # alternative: run make (possibly via `entr`) ->
+    ./st
+  }
+
+exit 0

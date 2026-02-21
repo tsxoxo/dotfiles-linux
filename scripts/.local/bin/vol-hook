@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+get_vol() {
+    pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -1
+}
+
+get_mute() {
+    pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes" && echo "MUTED" || echo ""
+}
+
+# Initial print
+echo "VOL $(get_vol)% $(get_mute)"
+
+# Listen for events
+pactl subscribe | while read -r event; do
+    if echo "$event" | grep -q "sink"; then
+        echo "VOL $(get_vol)% $(get_mute)"
+    fi
+done

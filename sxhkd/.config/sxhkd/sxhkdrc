@@ -1,11 +1,13 @@
 # Reload (after modifying config)
-alt + r ; {s,f,k,b}
+alt + r ; {s,f,b,t}
   { \
     pkill -USR1 -x sxhkd; notify-send -t 1500 'sxhkd' 'Reloaded config', \
     fluxbox-remote reconfigure; notify-send -t 1500 'fluxbox' 'Reloaded config', \
-    pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
-    bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted' \
+    bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted', \
+    reload_st; notify-send -t 1500 'reload_st' 'launched test instance' \
   }
+    # pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
+
 # Reload WM window manager
 alt + q ; {b,f}
   { \
@@ -24,12 +26,25 @@ XF86AudioNext
     playerctl next
 
 # QUESTION: Can we show a notification?
-XF86Audio{Raise,Lower}Volume
-  amixer -D pulse sset Master 5%{+,-}
+# XF86Audio{Raise,Lower}Volume
+#   amixer -D pulse sset Master 5%{+,-}
+#
+# XF86AudioMute
+#     pactl set-sink-mute @DEFAULT_SINK@ toggle
+# Raise Volume: Change -> Get -> Notify
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +5% && \
+    pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -1 | progress-notify audio
 
+# Lower Volume
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5% && \
+    pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -1 | progress-notify audio
+
+# Mute
 XF86AudioMute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
-
+    pactl set-sink-mute @DEFAULT_SINK@ toggle && \
+    pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -1 | progress-notify audio
 
 # ETC
 # Show date
@@ -50,10 +65,6 @@ alt + t ; {f,p,d}
 # example file: `/usr/share/doc/bspwm/examples/sxhkdrc`
 # NOTE: use `gf` on above path to open
 
-# app launcher
-# copied from bspwm example — use @ release event because dmenu tries to grab keyboard: https://github.com/baskerville/sxhkd/issues/59
-super + @space
-  rofi -show drun >/dev/null
 
 # close and kill
 super + q
@@ -79,12 +90,20 @@ alt + w ; semicolon
 #----focus------
 #---------------
 
+# QUESTION: leave this as backup?
+# copied from bspwm example — use @ release event because dmenu tries to grab keyboard: https://github.com/baskerville/sxhkd/issues/59
+super + @space
+  rofi -show drun >/dev/null
+
+alt + space
+  PATH="home/tom/.local/bin:$PATH" bspwm_window_picker
+
 # Switch between apps
 # top apps on homerow
 alt + { j, k, l, semicolon}
   wmctrl -xa \ 
   { \
-    kitty || kitty , \
+    st || st , \
     qutebrowser || qutebrowser, \
     zathura || zathura, \
     1password || 1password

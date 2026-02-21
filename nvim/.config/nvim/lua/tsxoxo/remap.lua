@@ -75,8 +75,11 @@ vim.keymap.set({ "n", "x" }, "c", '"_c', { desc = "Change without yanking" })
 vim.keymap.set("x", "y", "y']", { desc = "Yank and move to bottom" })
 
 -- yank whole file
-vim.keymap.set("n", "<leader>y", ":%y<CR>", { desc = "Yank whole file" })
-
+vim.keymap.set("n", "<leader>yy", ":%y<CR>", { desc = "Yank whole file" })
+vim.keymap.set("n", "<leader>yp", function()
+	local path = vim.fn.expand("%:p") -- '%t' filename only, '%h' dir
+	vim.fn.setreg("+", path)
+end, { desc = "Copy absolute path to clipboard" })
 -------------
 -- TOGGLES --
 -------------

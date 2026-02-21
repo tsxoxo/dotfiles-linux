@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+list_logic() {
+  for id in $(bspc query -N -n .window); do
+    title=$(xprop -id "$id" _NET_WM_NAME | cut -d '"' -f 2)
+    class=$(xprop -id "$id" WM_CLASS | awk -F '"' '{print $4}')
+    # SKIP the picker itself
+    [[ "$class" == "floating_picker" ]] && continue
+    printf "%s\t${BLUE}%-15s${NC} %s\n" "$id" "$class" "${title:-No Title}"
+  done
+}
+
+# Case 1: Just output the list (used by fzf reload)
+if [[ "$1" == "--list-logic" ]]; then
+  list_logic
+  exit 0
+fi
+
+# Case 2: The actual fzf interface
+# --with-nth 2: hide id which is column 1. pass it later via {1} to bspc
+if [[ "$1" == "--fzf" ]]; then
+  choice=$(
+    list_logic | fzf --ansi \
+      --with-nth 2.. \
+      --cycle \
+      --prompt=">> " \
+      --header="[d] Close | [ESC] Quit" \
+      --header-first \
+      --no-info \
+      --no-separator \
+      --layout=reverse \
+      --margin=1,2 \
+      --color="header:italic:underline:202,prompt:bold:33" \
+      --color="bg+:-1,fg+:-1" \
+      --bind "d:execute(bspc node {1} -c)+reload(sleep 0.1; $0 --list-logic)" \
+      --bind "alt-n:down,alt-p:up"
+  )
+
+  [[ -n "$choice" ]] && bspc node "$(echo "$choice" | cut -f 1)" -f
+
+# Case 3: Initial launch (from sxhkd)
+else
+  win_count=$(bspc query -N -n .window | wc -l)
+  height=$((win_count + 5))
+  [[ $height -gt 20 ]] && height=20
+  st -c "floating_picker" -g "100x$height" -e "$0" --fzf
+fi

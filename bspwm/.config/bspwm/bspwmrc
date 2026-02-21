@@ -9,6 +9,11 @@ dunst &
 unclutter --timeout 3 --ignore-scrolling --start-hidden --fork
 caffeine &
 
+~/.config/polybar/launch.sh &
+
+# set background
+~/.fehbg &
+
 # Tell D-Bus about your environment (Crucial for Dunst/Notify-send)
 dbus-update-activation-environment --all &
 
@@ -25,16 +30,21 @@ bspc config borderless_monocle true
 bspc config gapless_monocle false
 bspc config single_monocle true
 
-bspc config top_monocle_padding 24
+bspc config top_padding 44 # Adjust this number to match your bar's height
 bspc config right_monocle_padding 36
 bspc config bottom_monocle_padding 24
 bspc config left_monocle_padding 36
 
 bspc rule -a kitty desktop='^1' follow=on
+bspc rule -a st desktop='^1' follow=on
 # seems to focus despite follow=off
-bspc rule -a Zathura desktop='^1' state=tiled follow=off
+# bspc rule -a Zathura desktop='^1' state=tiled follow=off
 # failed experiment: only apply rule to certain zathura windows based on path in window title. prob use 'external rules command' for this
 # bspc rule -a "*:*:/home/tom/docs/job/applications/werkstudent/de_HPI_kursmanagement_moti.pdf" desktop='^1' state=tiled
 bspc rule -a ghidra-Ghidra desktop='^3' state=floating follow=off
 # bspc rule -a "*" desktop='^2' follow=on
 bspc rule -a Dragon state=floating sticky=on rectangle=400x800+0+240
+
+bspc rule -a feh state=floating rectangle=400x800+0+240
+
+bspc rule -a floating_picker state=floating center=true

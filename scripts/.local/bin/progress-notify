@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# based on
+# https://github.com/dunst-project/dunst/blob/master/contrib/progress-notify.sh
+
+# Use a consistent tag so notifications replace each other
+# canonical-private-synchronous is the "pro" way to do this
+ID_TAG="x-canonical-private-synchronous:sys-notify"
+ICON_BASE="/usr/share/icons/Papirus/48x48/status"
+
+# Helper to send the actual dunstify command
+send_notify() {
+  local title="$1"
+  local value="$2"
+  local icon="$3"
+  dunstify -h string:$ID_TAG:audio \
+    -h int:value:"$value" \
+    -t 1500 \
+    -a "System" \
+    -i "$icon" \
+    "$title"
+}
+
+# Read value from stdin
+input=$(cat /dev/stdin)
+
+case "$1" in
+audio)
+  # Check if muted using pactl (fastest)
+  if pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes"; then
+    send_notify "Muted" "$input" "$ICON_BASE/notification-audio-volume-muted.svg"
+  elif [ "$input" -eq 0 ]; then
+    send_notify "Volume: 0%" "$input" "$ICON_BASE/notification-audio-volume-off.svg"
+  elif [ "$input" -le 30 ]; then
+    send_notify "Volume: $input%" "$input" "$ICON_BASE/notification-audio-volume-low.svg"
+  elif [ "$input" -le 70 ]; then
+    send_notify "Volume: $input%" "$input" "$ICON_BASE/notification-audio-volume-medium.svg"
+  else
+    send_notify "Volume: $input%" "$input" "$ICON_BASE/notification-audio-volume-high.svg"
+  fi
+  ;;
+brightness)
+  if [ "$input" -eq 0 ]; then
+    send_notify "Brightness: 0%" "$input" "notification-display-brightness-off.svg"
+  elif [ "$input" -le 33 ]; then
+    send_notify "Brightness: $input%" "$input" "notification-display-brightness-low.svg"
+  elif [ "$input" -le 66 ]; then
+    send_notify "Brightness: $input%" "$input" "notification-display-brightness-medium.svg"
+  elif [ "$input" -lt 100 ]; then
+    send_notify "Brightness: $input%" "$input" "notification-display-brightness-high.svg"
+  else
+    send_notify "Brightness: 100%" "$input" "notification-display-brightness-full.svg"
+  fi
+  ;;
+esac

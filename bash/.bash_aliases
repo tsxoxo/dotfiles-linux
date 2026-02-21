@@ -14,6 +14,7 @@ alias aliasconf='nvim ~/.bash_aliases'
 alias aconf='nvim ~/.bash_aliases'
 alias kitconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
 alias kittyconf='nvim ~/dotfiles/kitty/.config/kitty/kitty.conf'
+alias stconf='nvim ~/.local/src/st-0.9.3/config.h'
 alias tmuxconf='edit_dotfiles "/tmux/.config/tmux/tmux.conf"'
 alias keyconf='sudoedit /usr/share/X11/xkb/symbols/realprog'
 alias sxconf='edit_dotfiles "/sxhkd/.config/sxhkd/sxhkdrc"'
@@ -24,6 +25,11 @@ alias yazconf='nvim ~/.config/yazi/'
 alias yazkeys='nvim ~/.config/yazi/keymap.toml'
 alias autoconf='nvim "$HOME/.xsessionrc" "$HOME/.bashrc" "$HOME/.profile" "$DOTFILES/bspwm/.config/bspwm/bspwmrc"'
 alias startconf='nvim "$HOME/.xsessionrc" "$HOME/.bashrc" "$HOME/.profile" "$DOTFILES/bspwm/.config/bspwm/bspwmrc"'
+alias nsxconf='nvim "$HOME/.config/nsxiv/exec/key-handler"'
+alias nsconf='nvim "$HOME/.config/nsxiv/exec/key-handler"'
+alias scriptconf='nvim ~/dotfiles/scripts/.local/bin/'
+alias scripts='nvim ~/dotfiles/scripts/.local/bin/'
+alias dunstconf='nvim ~/dotfiles/dunst/.config/dunst/dunstrc'
 
 edit_dotfiles() {
   nvim -c "cd $DOTFILES" "$DOTFILES$1"
@@ -206,3 +212,7 @@ _htd() {
 _dth() {
   printf "%x\n" "$1"
 }
+
+# change background
+# NOTE: then press <Ctrl+x>;Enter
+alias chbg="nsxiv -t -q -o /usr/share/backgrounds/"
