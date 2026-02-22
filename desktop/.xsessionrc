@@ -15,10 +15,15 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+export DOTFILES="$HOME/dotfiles"
+export DEV_DOCS="$HOME/docs/dev/"
+
 ### All is vim
 export MANPAGER='nvim +Man!'
 export VISUAL=nvim
 export EDITOR=nvim
+
+export TERMINAL=st
 
 # ---OTHER APPS---
 # Qt theme (needed if you use Qt apps)

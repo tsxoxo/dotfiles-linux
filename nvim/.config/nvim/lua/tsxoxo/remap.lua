@@ -134,11 +134,51 @@ vim.keymap.set("n", "<leader>g`", "0ys$`", { remap = true, desc = "Surround line
 
 local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
 
+-- Execute code
+vim.keymap.set("n", "<leader>fx", function()
+	vim.cmd("!chmod +x %")
+end, { desc = "Make file e[x]ecutable" })
+
+vim.keymap.set("n", "<leader>rx", function()
+	vim.cmd("w") -- Save first
+	local ft = vim.bo.filetype
+	if ft == "sh" then
+		-- Open a small terminal at the bottom (10 rows high)
+		-- 'bash %' runs the current file, 'read' keeps the window open so you can see output
+		vim.cmd("split | term bash %; echo -e '--- Press Enter to Close ---'")
+		-- Automatically enter 'Terminal Mode' so you can just hit Enter to close it later
+		vim.cmd("startinsert")
+	elseif ft == "python" then
+		vim.cmd("!python3 %")
+	elseif ft == "lua" then
+		vim.cmd("source %")
+	else
+		-- If no filetype, try running it as an executable
+		vim.cmd("!./%")
+	end
+end, { desc = "Smart Execute whole file" })
+
 -- Lua
--- Execute code on the spot
-vim.keymap.set("n", "<leader>cfx", "<cmd>source %<CR>", { desc = "Execute/source whole file." })
-vim.keymap.set("n", "<leader>cx", ":.lua<CR>", { desc = "Execute line of Lua." })
-vim.keymap.set("v", "<leader>cx", ":lua<CR>", { desc = "Execute selected region of Lua." })
+vim.keymap.set("n", "<leader>rll", ":.lua<CR>", { desc = "Execute line of Lua." })
+vim.keymap.set("v", "<leader>rll", ":lua<CR>", { desc = "Execute selected region of Lua." })
+
+-- Start entr loop
+vim.keymap.set("n", "<leader>re", function()
+	local file = vim.fn.expand("%")
+	local cmd = string.format("tmux split-window -d -v -p 20 \"echo %s | entr -r -s -c './%s'\"", file, file)
+	vim.fn.system(cmd)
+end, { desc = "Start live-reload [e]ntr loop in tmux pane" })
+
+---------------------------------
+--- PROJECTS
+---------------------------------
+vim.keymap.set("n", "<leader>wq", function()
+	-- Kill all other panes in the current tmux window
+	vim.fn.system("tmux kill-pane -a")
+	vim.fn.system("pkill -f st_dev")
+	-- Quit Neovim
+	vim.cmd("qa")
+end, { desc = "Kill session: tmux panes, test windows, and nvim" })
 
 -- Create framed heading like so:
 -------------

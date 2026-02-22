@@ -98,13 +98,13 @@ config.bind(',.', 'config-cycle tabs.show always never;; config-cycle statusbar.
 # defaults: 
 # jump to first tab: g^
 # jump to last tab: g$
-config.bind(',[', 'tab-focus 2')
-config.bind(',{', 'tab-focus 3')
-config.bind(',(', 'tab-focus 4')
-config.bind(',&', 'tab-focus 5')
-config.bind(',=', 'tab-focus 6')
-config.bind(',)', 'tab-focus 7')
-config.bind(',}', 'tab-focus 8')
+# config.bind(',[', 'tab-focus 2')
+# config.bind(',{', 'tab-focus 3')
+# config.bind(',(', 'tab-focus 4')
+# config.bind(',&', 'tab-focus 5')
+# config.bind(',=', 'tab-focus 6')
+# config.bind(',)', 'tab-focus 7')
+# config.bind(',}', 'tab-focus 8')
 
 # hop between last used tabs
 config.bind(',j', 'tab-focus stack-next')
@@ -125,13 +125,13 @@ config.bind(',,', 'tab-focus last')
 
 # Close tabs
 # ...below current one
-config.bind(',cj', 'tab-only --prev')
+config.bind(',dj', 'tab-only --prev')
 
 # Leave passthrough mode
 # By default, passthrough mode interprets shift+caps as backshift
 # config.bind('<Ctrl-q>', 'mode-leave', mode='passthrough')
 config.bind('..', 'mode-enter passthrough')
-config.bind('<Ctrl-.>', 'mode-leave', mode='passthrough')
+config.bind('<Ctrl-b>', 'mode-leave', mode='passthrough')
 
 ### Kill overlays
 config.bind(',xo', 'jseval (function () { '+

@@ -81,13 +81,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Detect shell scripts without extensions by shebang
-vim.api.nvim_create_autocmd("BufReadPost", {
-	desc = "Detect shell scripts without extensions by shebang",
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*",
 	callback = function()
+		-- Get the first line of the file
 		local first_line = vim.fn.getline(1)
-		if string.match(first_line, "^#!.*/bin/bash") or string.match(first_line, "^#!.*/bin/env%s+bash") then
-			vim.cmd("setfiletype bash")
+		if first_line:match("^#!.*/bin/.*bash") or first_line:match("^#!.*/bin/sh") then
+			vim.bo.filetype = "sh"
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+	pattern = "*",
+	callback = function()
+		-- Only run if filetype is empty or "text" (to save CPU)
+		if vim.bo.filetype == "" or vim.bo.filetype == "conf" or vim.bo.filetype == "text" then
+			local first_line = vim.fn.getline(1)
+			if first_line:match("^#!.*/bin/.*bash") then
+				vim.bo.filetype = "sh" -- Neovim uses "sh" for both bash and sh
+			end
 		end
 	end,
 })

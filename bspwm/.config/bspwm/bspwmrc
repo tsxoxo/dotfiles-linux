@@ -9,7 +9,7 @@ dunst &
 unclutter --timeout 3 --ignore-scrolling --start-hidden --fork
 caffeine &
 
-~/.config/polybar/launch.sh &
+launch_polybar &
 
 # set background
 ~/.fehbg &
@@ -37,6 +37,8 @@ bspc config left_monocle_padding 36
 
 bspc rule -a kitty desktop='^1' follow=on
 bspc rule -a st desktop='^1' follow=on
+bspc rule -a qutebrowser desktop='^2' follow=on
+
 # seems to focus despite follow=off
 # bspc rule -a Zathura desktop='^1' state=tiled follow=off
 # failed experiment: only apply rule to certain zathura windows based on path in window title. prob use 'external rules command' for this
@@ -48,3 +50,5 @@ bspc rule -a Dragon state=floating sticky=on rectangle=400x800+0+240
 bspc rule -a feh state=floating rectangle=400x800+0+240
 
 bspc rule -a floating_picker state=floating center=true
+bspc rule -a brain state=floating center=true focus=true
+bspc rule -a st_dev focus=off

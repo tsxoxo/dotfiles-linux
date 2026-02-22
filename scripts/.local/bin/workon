@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Usage: workon st
+
+case "$1" in
+st)
+  cd "$(zoxide query st)" || exit
+  # Open nvim and a hidden tmux pane running the entr loop
+  tmux split-window -d -v -p 20 "echo config.h | entr -r -s 'make && ./st -t \"st dev\" -c \"st_dev\"'"
+  nvim config.h
+  ;;
+brain)
+  cd ~/bin
+  tmux split-window -v -p 20 "echo brain | entr -r -s './brain test_query'"
+  nvim brain
+  ;;
+stop)
+  tmux kill-pane -a
+  pkill -f st_dev
+  notify-send "Cleanup" "Test windows and panes cleared."
+  ;;
+esac

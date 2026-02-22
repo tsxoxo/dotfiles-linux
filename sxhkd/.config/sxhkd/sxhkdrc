@@ -6,10 +6,10 @@ alt + r ; {s,f,b,t}
     bspc wm -r; notify-send -t 1500 'bspwm' 'Restarted', \
     reload_st; notify-send -t 1500 'reload_st' 'launched test instance' \
   }
-    # pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
+# pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
 
-# Reload WM window manager
-alt + q ; {b,f}
+# Reload WM window manager, log out, shut down
+alt + x ; {b,f}
   { \
     bspc quit, \
     fluxbox-remote exit \
@@ -55,7 +55,7 @@ alt + t ; {f,p,d}
     { \
     scrot $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took full screenshot', \
     scrot -s $(xdg-user-dir SCROTS)/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'scrot' 'Took partial screenshot', \
-    PATH="$HOME/.local/bin:$PATH" drag_scrots \
+    drag_scrots \
     }
 
 #############################################################
@@ -96,7 +96,10 @@ super + @space
   rofi -show drun >/dev/null
 
 alt + space
-  PATH="home/tom/.local/bin:$PATH" bspwm_window_picker
+  bspwm_window_picker
+
+alt + g
+  search_dev_notes
 
 # Switch between apps
 # top apps on homerow

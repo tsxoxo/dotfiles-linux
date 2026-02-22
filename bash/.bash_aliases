@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 # configs
-export DOTFILES="$HOME/dotfiles"
-
 alias conf='nvim ~/dotfiles/'
 alias dotconf='nvim ~/dotfiles/'
 alias dots='nvim ~/dotfiles/'
@@ -30,6 +28,9 @@ alias nsconf='nvim "$HOME/.config/nsxiv/exec/key-handler"'
 alias scriptconf='nvim ~/dotfiles/scripts/.local/bin/'
 alias scripts='nvim ~/dotfiles/scripts/.local/bin/'
 alias dunstconf='nvim ~/dotfiles/dunst/.config/dunst/dunstrc'
+alias polyconf='nvim ~/dotfiles/polybar/.config/polybar/config.ini'
+alias proconf='nvim "$DOTFILES/bash/.profile'
+alias stconf='nvim /home/tom/.local/src/st-0.9.3/config.h'
 
 edit_dotfiles() {
   nvim -c "cd $DOTFILES" "$DOTFILES$1"
@@ -40,8 +41,6 @@ alias fluxconf='nvim ~/.fluxbox/'
 alias tintconf='nvim ~/.config/tint2/'
 
 # docs
-export DEV_DOCS="$HOME/docs/dev/"
-
 alias docs='nvim ~/docs/'
 alias doc='nvim ~/docs/'
 
@@ -97,6 +96,7 @@ alias mv="mv -iv"       # dont overwrite stuff, show results
 alias cp="cp -iv"       # dont overwrite stuff, show results
 alias mkdir="mkdir -pv" # also dont overwrite stuff, show results
 alias rm="rm -Iv"       # confirm when >3; verbose
+alias rg="rg --color=always"
 
 alias xclip="xclip -selection clipboard"
 
