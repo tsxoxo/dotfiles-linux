@@ -9,6 +9,11 @@
 # - ~/.inputrc
 #
 # .inputrc handles readline stuff like auto-completion and vi mode.
+#
+
+# NOTE: set env vars in .profile, source .profile in bspwmrc
+
+export PS1="\n${PS1}"
 
 # Settings
 shopt -s histappend

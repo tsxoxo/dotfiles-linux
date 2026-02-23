@@ -41,10 +41,10 @@ _search() {
 if [ -t 0 ]; then
   # I am already in a terminal, just run.
   _search "$@" && exit 0
-
 else
   # I am floating in the void, launch a terminal + myself.
-  st -t "The Brain" -c "brain" -g 140x40 -e "$0" "$@" && exit 0
+  # add class to window so we can make window float via bspwmrc
+  st -t "Search dev notes" -c "search-dev-notes" -g 140x40 -e "$0" "$@" && exit 0
 fi
 
 echo 'ERROR'

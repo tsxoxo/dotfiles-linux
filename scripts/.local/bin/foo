@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
+# NOTE: file for ad-hoc tests
+
 echo hahljadf

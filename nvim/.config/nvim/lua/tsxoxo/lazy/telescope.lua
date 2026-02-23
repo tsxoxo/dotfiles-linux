@@ -186,22 +186,25 @@ return {
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Telescope keymaps" })
 
 		-- grep
-		vim.keymap.set("n", "<leader>Ss", builtin.live_grep, { desc = "[s]tring" })
-		vim.keymap.set("n", "<leader>Sc", function()
+		vim.keymap.set("n", "<leader>gs", builtin.live_grep, { desc = "[s]tring" })
+		vim.keymap.set("n", "<leader>gc", function()
 			builtin.live_grep({ cwd = bufdir() })
 		end, { desc = "[c]urrent dir" })
-		vim.keymap.set("n", "<leader>Sg", live_grep_from_project_git_root, { desc = "from [g]it root" })
-		vim.keymap.set("n", "<leader>Sd", function()
+		vim.keymap.set("n", "<leader>gg", live_grep_from_project_git_root, { desc = "from [g]it root" })
+		vim.keymap.set("n", "<leader>gd", function()
 			builtin.live_grep({ cwd = "$HOME/docs/" })
 		end, { desc = "[d]ocs" })
-		vim.keymap.set("n", "<leader>Sn", function()
-			builtin.live_grep({ cwd = "$HOME/docs/dev" })
+		vim.keymap.set("n", "<leader>gn", function()
+			builtin.live_grep({ cwd = "$DEV_DOCS" })
 		end, { desc = "dev [n]otes" })
-		vim.keymap.set("n", "<leader>Sv", function()
+		vim.keymap.set("n", "<leader>g.", function()
+			builtin.live_grep({ cwd = "$DOTFILES" })
+		end, { desc = "dotfiles" })
+		vim.keymap.set("n", "<leader>gv", function()
 			builtin.live_grep({
 				cwd = nvim_config_dir,
 			})
 		end, { desc = "n[v]im config" })
-		vim.keymap.set("n", "<leader>s*", "<cmd>Telescope grep_string<cr>", { desc = "string under cursor" })
+		vim.keymap.set("n", "<leader>g*", "<cmd>Telescope grep_string<cr>", { desc = "string under cursor" })
 	end,
 }

@@ -55,7 +55,7 @@ c.downloads.location.prompt = False
 c.downloads.remove_finished = 5000
 
 c.auto_save.session = True
-c.session.lazy_restore = False
+c.session.lazy_restore = True
 
 #----------
 # CONTENT -
@@ -105,6 +105,10 @@ config.bind(',.', 'config-cycle tabs.show always never;; config-cycle statusbar.
 # config.bind(',=', 'tab-focus 6')
 # config.bind(',)', 'tab-focus 7')
 # config.bind(',}', 'tab-focus 8')
+
+# sessions
+config.bind(',sl', 'cmd-set-text -s :session-load')
+config.bind(',ss', 'cmd-set-text -s :session-save')
 
 # hop between last used tabs
 config.bind(',j', 'tab-focus stack-next')

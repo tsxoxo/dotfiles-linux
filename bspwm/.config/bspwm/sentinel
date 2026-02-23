@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#============================================================
+# sentinel
+# a sanity check that fails loudly if config is incorrect
+#============================================================
+
+# Use absolute path for notify-send to ensure it works even if PATH is empty
+NOTIFY="/usr/bin/notify-send"
+
+#------------------------------------------------------------
+# ENV (check exemplary env var)
+#------------------------------------------------------------
+if [ -z "$DOTFILES" ]; then
+  $NOTIFY -u critical -t 0 "SENTINEL FAILURE" "DOTFILES variable is missing."
+fi
+
+#------------------------------------------------------------
+# PATH
+#------------------------------------------------------------
+# We use the full path to 'grep' and 'wc' as well for maximum paranoia
+count=$(echo ":$PATH:" | /bin/grep -o ":$HOME/.local/bin:" | /usr/bin/wc -l)
+
+if [ "$count" -ne 1 ]; then
+  $NOTIFY -u critical -t 0 "PATH ERROR" "Check your .profile. Found $count instances of .local/bin."
+fi

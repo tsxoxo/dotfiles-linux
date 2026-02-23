@@ -46,5 +46,6 @@ else
   win_count=$(bspc query -N -n .window | wc -l)
   height=$((win_count + 5))
   [[ $height -gt 20 ]] && height=20
-  st -c "floating_picker" -g "100x$height" -e "$0" --fzf
+  # add class to window so we can make window float via bspwmrc
+  st -c "win-switch" -g "100x$height" -e "$0" --fzf
 fi

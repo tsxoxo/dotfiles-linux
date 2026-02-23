@@ -31,6 +31,7 @@ alias dunstconf='nvim ~/dotfiles/dunst/.config/dunst/dunstrc'
 alias polyconf='nvim ~/dotfiles/polybar/.config/polybar/config.ini'
 alias proconf='nvim "$DOTFILES/bash/.profile'
 alias stconf='nvim /home/tom/.local/src/st-0.9.3/config.h'
+alias zaconf='edit_dotfiles "/zathura/.config/zathura/zathurarc"'
 
 edit_dotfiles() {
   nvim -c "cd $DOTFILES" "$DOTFILES$1"

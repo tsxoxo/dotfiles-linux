@@ -1,5 +1,16 @@
 #! /bin/sh
 
+#============================================================
+# AUTOSTART
+#============================================================
+
+if [ -f "$HOME/.profile" ]; then
+  . "$HOME/.profile"
+fi
+
+# Tell D-Bus about your environment (Crucial for Dunst/Notify-send)
+dbus-update-activation-environment --all &
+
 # Kill existing processes to prevent duplicates on restart
 killall -q sxhkd dunst unclutter caffeine
 
@@ -14,41 +25,71 @@ launch_polybar &
 # set background
 ~/.fehbg &
 
-# Tell D-Bus about your environment (Crucial for Dunst/Notify-send)
-dbus-update-activation-environment --all &
+# set laptop-keys to layout 'realprog'
+# NOTE: 2025-02-23 desperate janky hard-coded hack after trying 169 'better' solutions
+setxkbmap -device 15 realprog
 
-# --- bspwm stuff ---
+# sanity-check: make sure ENV and PATH are correct
+"$HOME/.config/bspwm/sentinel" &
+
+#============================================================
+# BSPWM CONFIG
+#============================================================
 bspc monitor -d I II III IV
-
-bspc config border_width 2
-bspc config window_gap 12
-
-bspc config split_ratio 0.52
 
 # Monocle
 bspc config borderless_monocle true
 bspc config gapless_monocle false
 bspc config single_monocle true
 
+# Size
+bspc config border_width 2
+bspc config split_ratio 0.52
+
+# Space
+bspc config window_gap 12
+
 bspc config top_padding 44 # Adjust this number to match your bar's height
 bspc config right_monocle_padding 36
 bspc config bottom_monocle_padding 24
 bspc config left_monocle_padding 36
 
+#============================================================
+# RULES
+#============================================================
+
+#------------------------------------------------------------
+# APPS
+#------------------------------------------------------------
+
 bspc rule -a kitty desktop='^1' follow=on
 bspc rule -a st desktop='^1' follow=on
 bspc rule -a qutebrowser desktop='^2' follow=on
-
-# seems to focus despite follow=off
-# bspc rule -a Zathura desktop='^1' state=tiled follow=off
-# failed experiment: only apply rule to certain zathura windows based on path in window title. prob use 'external rules command' for this
-# bspc rule -a "*:*:/home/tom/docs/job/applications/werkstudent/de_HPI_kursmanagement_moti.pdf" desktop='^1' state=tiled
-bspc rule -a ghidra-Ghidra desktop='^3' state=floating follow=off
-# bspc rule -a "*" desktop='^2' follow=on
+bspc rule -a firefox desktop='^3' follow=on
 bspc rule -a Dragon state=floating sticky=on rectangle=400x800+0+240
-
 bspc rule -a feh state=floating rectangle=400x800+0+240
+bspc rule -a Zathura desktop='^1' state=tiled focus=false
 
-bspc rule -a floating_picker state=floating center=true
-bspc rule -a brain state=floating center=true focus=true
-bspc rule -a st_dev focus=off
+# TODO: open certain zathura windows tiled and without focus. use-case: typst preview (doing homework, writing applications)
+# failed experiment:
+# bspc rule -a "*:*:/home/tom/docs/job/applications/werkstudent/de_HPI_kursmanagement_moti.pdf" desktop='^1' state=tiled
+# prob use 'external rules command' for this
+
+# TODO: try implementing the desktop where everybody floats. used for ghidra and gimp
+bspc rule -a ghidra-Ghidra desktop='^3' state=floating follow=off
+
+#------------------------------------------------------------
+# SCRIPTS
+#------------------------------------------------------------
+# windows produced by utils
+
+bspc rule -a win-switch state=floating center=true focus=true
+bspc rule -a search-dev-notes state=floating center=true focus=true
+
+#------------------------------------------------------------
+# DEV
+#------------------------------------------------------------
+# windows that are dev artifacts
+
+# `workon st`
+bspc rule -a st-dev focus=off

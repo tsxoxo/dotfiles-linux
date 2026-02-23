@@ -8,8 +8,8 @@ alt + r ; {s,f,b,t}
   }
 # pkill -SIGUSR1 -x kitty; notify-send -t 1500 'kitty' 'Reloaded config', \
 
-# Reload WM window manager, log out, shut down
-alt + x ; {b,f}
+# Quit WM window manager, log out
+alt + q ; {b,f}
   { \
     bspc quit, \
     fluxbox-remote exit \
@@ -65,14 +65,13 @@ alt + t ; {f,p,d}
 # example file: `/usr/share/doc/bspwm/examples/sxhkdrc`
 # NOTE: use `gf` on above path to open
 
-
-# close and kill
-super + q
-	bspc node -k
-
 #----------------
 # state/flags --
 #----------------
+
+# close and kill
+alt + w; q
+	bspc node -k
 
 # set the window state
 alt + w ; {t,f,l}
@@ -96,17 +95,17 @@ super + @space
   rofi -show drun >/dev/null
 
 alt + space
-  bspwm_window_picker
+  win-switch
 
 alt + g
-  search_dev_notes
+  search-dev-notes
 
 # Switch between apps
 # top apps on homerow
 alt + { j, k, l, semicolon}
   wmctrl -xa \ 
   { \
-    st || st , \
+    st || st, \
     qutebrowser || qutebrowser, \
     zathura || zathura, \
     1password || 1password
@@ -158,7 +157,7 @@ alt + w; {a,s,d}
 
 # move window
 alt + w ; m ; Left
-  bspc node --move -50 0; notify-send -t 1000 "it works" "foo"
+  bspc node --move -50 0
 
 # expand a window by moving one of its side outward
 alt + w ; shift + {Left,Down,Up,Right}
