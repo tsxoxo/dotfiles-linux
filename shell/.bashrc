@@ -59,3 +59,13 @@ eval "$(fzf --bash)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# NOTE: 2025-02-23 jesus h. christ the pain to get this working. this is messy (.profile: set env -> tmux.conf: set-environment -> here: set env from tmux env)
+# i hate it. but it works. i am done.
+# If inside tmux, sync the most critical vars from the server
+if [ -n "$TMUX" ]; then
+  # Grab the specific vars in shell format and eval them safely
+  eval "$(tmux show-environment -s DBUS_SESSION_BUS_ADDRESS)"
+  eval "$(tmux show-environment -s DOTFILES)"
+  eval "$(tmux show-environment -s DEV_DOCS)"
+fi
