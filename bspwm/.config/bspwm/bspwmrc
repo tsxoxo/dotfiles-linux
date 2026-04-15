@@ -68,7 +68,9 @@ bspc rule -a qutebrowser desktop='^2' follow=on
 bspc rule -a firefox desktop='^3' follow=on
 bspc rule -a Dragon state=floating sticky=on rectangle=400x800+0+240
 bspc rule -a feh state=floating rectangle=400x800+0+240
-bspc rule -a Zathura desktop='^1' state=tiled focus=false
+bspc rule -a Zathura desktop='^1' state=tiled
+# NOTE: I want focus more often than not it seems:
+# bspc rule -a Zathura desktop='^1' state=tiled focus=false
 
 # TODO: open certain zathura windows tiled and without focus. use-case: typst preview (doing homework, writing applications)
 # failed experiment:

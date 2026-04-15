@@ -37,6 +37,7 @@ return {
 				"basedpyright",
 				-- "asm_lsp", needs cargo installed. i'll leave this out for now. 2025-09-21
 				"clangd",
+				"tinymist",
 			},
 			automatic_enable = false,
 		})

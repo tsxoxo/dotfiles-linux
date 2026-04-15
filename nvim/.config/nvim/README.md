@@ -2,51 +2,9 @@
 
 ## Cheatsheet
 
-###
-
-`zz`: Save and quit
-
 ### Reload config file
 
 `:so %`
-
-### Jumping
-
-see full list at ":help ']" and after
-
-gi jump to last edit and switch to insert mode
-`.	jump to position where last change occurred in current buffer
-`" jump to position where last exited current buffer
-`0	jump to position in last file edited (when exited Vim)
-`1 like `0 but the previous file (also `2 etc)
-'' jump back (to line in current buffer where jumped from)
-``	jump back (to position in current buffer where jumped from)
-`[ or `] jump to beginning/end of previously changed or yanked text
-`< or `> jump to beginning/end of last visual selection
-
-### Repeat '#' n times
-
-- `69i#<Esc>`
-- `:put =string.rep('=', 80)`
-
-### Save as...
-
-:w new_filename.asm " Write copy to new file, keep editing original
-:saveas new_filename " Write copy to new file, and switch to it
-:saveas! new_filename " Force overwrite if file exists
-
-### Get CWD of current buffer
-
--- Get directory of current buffer
-vim.fn.expand('%:p:h')
-
--- Alternative using vim.api
-local bufname = vim.api.nvim_buf_get_name(0)
-local dir = vim.fn.fnamemodify(bufname, ':p:h')
-
--- Using vim.fs (Neovim 0.8+)
-local bufname = vim.api.nvim_buf_get_name(0)
-local dir = vim.fs.dirname(bufname)
 
 ### Get nvim sys dir
 
@@ -58,11 +16,6 @@ Two methods:
 
 1. Use `vim.inspect`: `:lua print(vim.inspect(vim.api.nvim_get_mark('U',{})))`
 2. `:lua = vim.api.some_func()`
-
-### Explore keymaps
-
--- Find out where a keymap is set: `:verbose map`
--- Find info about specific keymap: `verbose nmap ]a`
 
 ### Lua API basics
 
@@ -108,25 +61,7 @@ Get buffer id from a file-mark:
 - formatting: `:ConformInfo`
 - LSP: `:checkhealth lsp` or `checkhealth vim.lsp`
 
-## Keybindings
-
-### Code
-
-- View errors/warnings for whole file -- **<leader>D**
-
-- put a bunch of stuff in quickfix list, move to next item: run telescope, `C-q` for all OR `<tab>...` and then `M-Q` for selection, `]q`
-
-- View errors/warnings for line (extend cut off text) -- **<leader>d**
-
-- Go to definition -- **gd**
-
-- Rename symbol -- **grn**
-
 ## Feature wishlist
 
 - see all errors/diagnostics in project
 
-## Inspiration
-
-- Primeagen
-- Josean

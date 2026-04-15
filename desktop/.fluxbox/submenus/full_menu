@@ -19,6 +19,7 @@
 [exec] (nitrogen ) { nitrogen } Categories=Utility;GTK;DesktopSettings;
 [exec] (Onboard ) { onboard } Categories=Utility;Accessibility;
 [exec] (Passwords and Keys ) { seahorse  } Categories=GNOME;GTK;Security;Utility;DesktopSettings;X-XFCE-SettingsDialog;
+[exec] (Proton Pass ) { proton-pass  } Categories=Utility;
 [exec] (ROXTerm ) { roxterm } Categories=GTK;Utility;TerminalEmulator;System;
 [exec] (TeXInfo ) { x-terminal-emulator -e info } Categories=Utility;Documentation;ConsoleOnly;
 [exec] (Thunar File Manager ) { thunar  } Categories=System;Utility;Core;GTK;FileTools;FileManager;
@@ -26,11 +27,13 @@
 [exec] (Xfburn ) { xfburn } Categories=X-XFCE;GTK;DiscBurning;Archiving;AudioVideo;Utility;
 [end]
 [submenu] (Development)
+[exec] (Antigravity ) { /usr/share/antigravity/antigravity  } Categories=TextEditor;Development;IDE;
 [exec] (Geany ) { geany  } Categories=GTK;Development;IDE;TextEditor;
 [exec] (Icon Browser ) { yad-icon-browser } Categories=GTK;Development;
 [end]
 [submenu] (Graphics)
 [exec] (GNU Image Manipulation Program ) { gimp-2.10  } Categories=Graphics;2DGraphics;RasterGraphics;GTK;
+[exec] (Inkscape ) { inkscape  } Categories=Graphics;VectorGraphics;GTK;
 [exec] (nomacs ) { nomacs  } Categories=Graphics;RasterGraphics;Viewer;2DGraphics;
 [end]
 [submenu] (Internet)

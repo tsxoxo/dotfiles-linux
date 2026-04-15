@@ -3,12 +3,15 @@
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+# WARN: Identifier for the window. Used to filter it out from the list and to set a rule in bspwmrc.
+WINDOW_CLASS="win-switch"
+
 list_logic() {
   for id in $(bspc query -N -n .window); do
     title=$(xprop -id "$id" _NET_WM_NAME | cut -d '"' -f 2)
     class=$(xprop -id "$id" WM_CLASS | awk -F '"' '{print $4}')
     # SKIP the picker itself
-    [[ "$class" == "floating_picker" ]] && continue
+    [[ "$class" == "$WINDOW_CLASS" ]] && continue
     printf "%s\t${BLUE}%-15s${NC} %s\n" "$id" "$class" "${title:-No Title}"
   done
 }
@@ -47,5 +50,5 @@ else
   height=$((win_count + 5))
   [[ $height -gt 20 ]] && height=20
   # add class to window so we can make window float via bspwmrc
-  st -c "win-switch" -g "100x$height" -e "$0" --fzf
+  st -c "$WINDOW_CLASS" -g "100x$height" -e "$0" --fzf
 fi

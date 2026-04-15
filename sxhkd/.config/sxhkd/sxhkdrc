@@ -108,7 +108,7 @@ alt + { j, k, l, semicolon}
     st || st, \
     qutebrowser || qutebrowser, \
     zathura || zathura, \
-    1password || 1password
+    proton-pass || proton-pass
   }
 # row above is for tmux windows
 alt + { m }
@@ -117,10 +117,11 @@ alt + { m }
     firefox || firefox, \
   }
 # less used stuff behind mode switch 
-alt + w; { m }
+alt + w; { m,j }
   wmctrl -xa \ 
   { \
     chromium || chromium , \
+    antigravity || antigravity, \
   }
 # do i even need more
 # mpv || mpv, \

@@ -15,6 +15,7 @@ vim.lsp.enable({
 	"bashls",
 	"basedpyright",
 	"ruff",
+	"tinymist",
 })
 
 -- Change the Diagnostic symbols in the sign column (gutter)

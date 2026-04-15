@@ -1,11 +1,11 @@
 man-qutebrowser-cheatsheet https://chipsenkbeil.com/notes/qutebrowser-cheatsheet/
 comm-email-tsxoxo-proton https://mail.proton.me/u/0/inbox
 hpi-email-potsdam https://mailup.uni-potsdam.de/
-jobs uni potsdam https://praxisportal.uni-potsdam.de/
+job-uni-potsdam https://praxisportal.uni-potsdam.de/
 maths vorkurs tu https://vorkurs-mathematik.innocampus.tu-berlin.de/page/about
 unixporn-bspwm-bluewave https://www.reddit.com/r/unixporn/comments/1ldsthb/bspwm_first_time_using_a_wm_and_im_already_loving/
 hpi-moodle https://moodle.hpi.de/my/
-hpi-sv-my-campus https://sv-portal.hpi.de/campus/#!app/smartdesign.campus.appointment
+hpi-sv-my-campus https://sv-portal.hpi.de/
 hpi-confluence https://confluence.hpi.de/#all-updates
 hpi-email https://outlook.office365.com/mail/
 hpi-slack https://app.slack.com/client/E055BG3H51R
@@ -70,3 +70,6 @@ ai-gemini https://gemini.google.com/app
 dev-scheme https://www.wescheme.org/openEditor
 media-movies-watchlist https://letterboxd.com/adampagoda/watchlist/
 ai-notebookLM https://notebooklm.google.com/?icid=home_maincta
+job-oh-miro-vorkurs-leadkurs https://miro.com/app/board/uXjVG9rRNJs=/
+man-typst-symbols https://typst.app/docs/reference/symbols/sym/
+hpi-gitlab https://gitlab.hpi.de/
