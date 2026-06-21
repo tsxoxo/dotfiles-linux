@@ -178,3 +178,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		end
 	end,
 })
+
+-- style markdown *emphasized* text
+vim.api.nvim_create_autocmd('VimEnter', {
+  pattern = '*',
+  callback = function()
+    vim.schedule(function()
+      vim.api.nvim_set_hl(0, '@markup.italic.markdown_inline', { fg = '#808080' })
+      vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#000000', bg = '#e0a800', bold = true })
+      vim.api.nvim_set_hl(0, 'Search',    { fg = '#000000', bg = '#7D7143' })
+    end)
+  end,
+})

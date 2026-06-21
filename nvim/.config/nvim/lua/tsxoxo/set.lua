@@ -63,6 +63,10 @@ vim.opt.diffopt:append("horizontal")
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 2
 
+-- WORDS
+-- 
+vim.opt.iskeyword:remove('_')
+
 -- UI
 --
 -- Show absolute line number on current line
